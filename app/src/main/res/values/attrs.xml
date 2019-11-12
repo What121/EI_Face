@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CameraSurfaceView">
+        <attr name="msv_cameraFront" format="boolean" />
+        <attr name="msv_cameraMirrorX" format="boolean" />
+        <attr name="msv_cameraVertical" format="boolean" />
+    </declare-styleable>
+</resources>

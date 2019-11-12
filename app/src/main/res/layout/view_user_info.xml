@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:gravity="center_horizontal"
+        android:id="@+id/userinfo_headimg"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:src="@mipmap/default_face"
+        app:civ_border_color="@color/colorWhite"
+        app:civ_border_width="2dp" />
+
+    <TextView
+        android:id="@+id/userinfo_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:text="姓名："
+        android:textColor="@color/colorLightBlue"
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/userinfo_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:text="身份证号:"
+        android:textColor="@color/colorLightBlue"
+        android:textSize="28sp" />
+
+</LinearLayout>

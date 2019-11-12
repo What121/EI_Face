@@ -1,0 +1,25 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoBar" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <!--<item name="android:windowIsTranslucent">true</item>-->
+        <!-- 是否填充慢屏幕，引用android:windowNoTitle 的值 ?android:windowNoTitle，取决于android:windowNoTitle的值-->
+        <item name="android:windowFullscreen">?android:windowNoTitle</item>
+    </style>
+
+    <style name="AppTheme.BottomPopup" parent="AppTheme.NoBar">
+        <item name="android:windowBackground">@color/translucent_background</item>
+        <!--透明-->
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+
+</resources>
