@@ -33,36 +33,6 @@ public class wffrdualcamapp {
     public static int finish_state = 1;
 
 
-    public static int getFinishState() {
-        return finish_state;
-    }
-
-
-    public static int getState() {
-        return state;
-    }
-
-    public static void setState(int value)  {
-        try {
-            semaphore.acquire();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        state = value;
-
-        semaphore.release();
-
-    }
-
-    public static void setAssetPath(String path) {
-        assetPath = path;
-    }
-
-    public static long getTimeLeft() {
-        return timeRemaining;
-    }
-
     public static int startExecution(byte[] cameraDataColor, byte[] cameraDataIR, int frameWidth, int frameHeight, String name)  {
         try {
             semaphore.acquire();
@@ -142,9 +112,8 @@ public class wffrdualcamapp {
 
                     System.out.println("WFFRJNI: Enroll Init");
                     Log.d(TAG, "startExecution: WFFRJNI: Enroll Init" );
-                    if (name != null && name.contains(",")) {
-                        no = name.substring(name.lastIndexOf(',')+1);
-                        name = name.substring(0, name.lastIndexOf(','));
+                    if (name != null ) {
+                        name = name.trim();
                     }
                     int addRec = wffrjni.addRecord(name, no);
                     if (addRec != 0) {
@@ -190,7 +159,7 @@ public class wffrdualcamapp {
 
             currentState = state;
             semaphore.release();
-            if (confidence!=null){
+            if (state==2&&confidence!=null){
                 if (confidence.length>0){
                     return (int)confidence[0];
                 }
@@ -203,31 +172,32 @@ public class wffrdualcamapp {
         }
     }
 
+    /** Force stop recognition/enroll process and release engine instance**/
+    public static int stopExecution()
+    {
+        try {
+            semaphore.acquire();
+            if (frInitialized == 1)
+            {
+                wffrjni.Release();
+                frInitialized = 0;
+                state = 0;
+            }
+
+            semaphore.release();
+            return 0;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
     public static void releaseEngine(){
         wffrjni.Release();
         state = 0;
         frInitialized = 0;
     }
 
-    /** Force stop recognition/enroll process and release engine instance**/
-    public static int stopExecution()
-    {
-	try {
-	    semaphore.acquire();
-	    	if (frInitialized == 1)
-		{
-		    wffrjni.Release();
-		    frInitialized = 0;
-		    state = 0;
-		}
-
-		semaphore.release();
-		return 0;
-       } catch (InterruptedException e) {
-            e.printStackTrace();
-	    return 1;
-       }	
-    }
 
 
     public static int getDatabase() {
@@ -265,9 +235,36 @@ public class wffrdualcamapp {
         }       
     }
 
+    public static int getFinishState() {
+        return finish_state;
+    }
+
+    public static int getState() {
+        return state;
+    }
+
+    public static void setState(int value)  {
+        try {
+            semaphore.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        state = value;
+
+        semaphore.release();
+
+    }
+
+    public static void setAssetPath(String path) {
+        assetPath = path;
+    }
+
+    public static long getTimeLeft() {
+        return timeRemaining;
+    }
 
     public static int[][] getFaceCoordinates() {
-
         return faceCoordinates;
     }
 
@@ -280,8 +277,6 @@ public class wffrdualcamapp {
     }
 
     public static Object[] getDatabaseNames() {
-
-
         return DBnames;
     }
 

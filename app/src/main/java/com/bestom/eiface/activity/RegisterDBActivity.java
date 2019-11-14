@@ -1,13 +1,17 @@
 package com.bestom.eiface.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,11 +24,12 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.bestom.ei_library.EIFace;
 import com.bestom.ei_library.commons.beans.UserInfoDBBean;
+import com.bestom.eiface.Handler.RegisterDBHandler;
 import com.bestom.eiface.MyApp;
 import com.bestom.eiface.R;
 import com.bestom.eiface.view.adapter.RegisterDB_UserInforAdapter;
-import com.wf.wffrdualcamapp;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -37,10 +42,12 @@ import butterknife.Unbinder;
 
 public class RegisterDBActivity extends AppCompatActivity {
     private static final String TAG = "RegisterDBActivity";
+    private final int INIT_DATA=111;
     private Context mContext;
     private Activity mActivity;
     private Unbinder mUnbinder;
 
+    RegisterDBHandler mRegisterDBHandler;
     RegisterDB_UserInforAdapter mRegisterDBUserInforAdapter;
     RecyclerView recyclerView;
     String assetPath;
@@ -57,7 +64,7 @@ public class RegisterDBActivity extends AppCompatActivity {
         mContext=this;
         mActivity=this;
         mUnbinder= ButterKnife.bind(this);
-
+        mRegisterDBHandler=new RegisterDBHandler(this);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         myToolbar.setTitle("Search Person");
@@ -86,7 +93,7 @@ public class RegisterDBActivity extends AppCompatActivity {
 
         boolean isDebug = sharedPreferences.getBoolean("debug_switch",false);
 
-        mRegisterDBUserInforAdapter = new RegisterDB_UserInforAdapter(this, mUserInfoDBBeanList,
+        mRegisterDBUserInforAdapter = new RegisterDB_UserInforAdapter(mContext, mUserInfoDBBeanList,
                 false,true);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(),
@@ -138,7 +145,8 @@ public class RegisterDBActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog,int which) {
                 // Write your code here to invoke YES event
 
-                wffrdualcamapp.deletePerson(recordID);
+//                wffrdualcamapp.deletePerson(recordID);
+                EIFace.deletePerson(recordID);
                 Toast.makeText(RegisterDBActivity.this, "Record Deleted", Toast.LENGTH_SHORT).show();
                 mRegisterDBUserInforAdapter.removeItem(position);
             }
@@ -157,9 +165,12 @@ public class RegisterDBActivity extends AppCompatActivity {
     }
 
     private void initDatabaseList() {
-        Log.i(TAG,"INIT : "+ wffrdualcamapp.getDatabase());
-        String[] userinfos = (String[]) wffrdualcamapp.getDatabaseNames();
-        int[] recordIDs = wffrdualcamapp.getDatabaseRecords();
+//        Log.i(TAG,"INIT : "+ wffrdualcamapp.getDatabase());
+//        String[] userinfos = (String[]) wffrdualcamapp.getDatabaseNames();
+//        int[] recordIDs = wffrdualcamapp.getDatabaseRecords();
+        Log.i(TAG,"INIT : "+ EIFace.getDatabase());
+        String[] userinfos = EIFace.getDatabaseNames();
+        int[] recordIDs = EIFace.getDatabaseRecords();
 
         if (userinfos!=null){
             for (int i = 0; i < userinfos.length; i++) {
@@ -178,6 +189,12 @@ public class RegisterDBActivity extends AppCompatActivity {
                 return t0.getName().compareToIgnoreCase(t1.getName());
             }
         });
+    }
+
+    public void supplementInitDB(){
+        initDatabaseList();
+        mRegisterDBUserInforAdapter = new RegisterDB_UserInforAdapter(mContext, mUserInfoDBBeanList, false,true);
+        mRegisterDBUserInforAdapter.notifyDataSetChanged();
     }
 
 
@@ -229,6 +246,13 @@ public class RegisterDBActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        Cursor cursor = EIFace.getALL();
+        Log.d(TAG, "cursor count: "+cursor.getCount());
+        for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            Log.d(TAG, "cursor  recordid"+cursor.getInt(0) +"  ID:"+cursor.getString(1)+"   name:"+cursor.getString(2));
+        }
+
     }
 
     @Override
@@ -248,7 +272,8 @@ public class RegisterDBActivity extends AppCompatActivity {
             searchView.setIconified(true);
             return;
         }
-        wffrdualcamapp.setState(1);
+//        wffrdualcamapp.setState(1);
+        EIFace.setState(1);
         super.onBackPressed();
     }
 }

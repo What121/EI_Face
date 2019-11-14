@@ -11,9 +11,8 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 
+import com.bestom.ei_library.EIFace;
 import com.bestom.eiface.MyApp;
-import com.wf.wffrdualcamapp;
-import com.wf.wffrjni;
 
 import java.util.ArrayList;
 
@@ -138,7 +137,8 @@ public class CameraDetectView extends View {
 
             //region !enroll
             else {
-                if (confidenceValList.size() != 0 && confidenceValList.get(iValue) > wffrjni.GetRecognitionThreshold()) {
+//                if (confidenceValList.size() != 0 && confidenceValList.get(iValue) > wffrjni.GetRecognitionThreshold()) {
+                if (confidenceValList.size() != 0 && confidenceValList.get(iValue) > EIFace.GetRecognitionThreshold()) {
                     paint.setColor(0xff20960c);
                     //绘画 效果矩形框
 //                    drawStyle1Rectangle(leftV, rightV, topV, bottomV, paint, canvas);
@@ -188,7 +188,8 @@ public class CameraDetectView extends View {
             if (isDebugMode) {
                 paint.setTextSize(35);
                 paint.setStyle(Paint.Style.FILL);
-                canvas.drawText("Process Time : " + wffrdualcamapp.t2 + " ms", 150, 150, paint);
+//                canvas.drawText("Process Time : " + wffrdualcamapp.t2 + " ms", 150, 150, paint);
+                canvas.drawText("Process Time : " + EIFace.getT2() + " ms", 150, 150, paint);
             }
         }
 
@@ -370,6 +371,13 @@ public class CameraDetectView extends View {
         int rightV = rightCornerValues.get(iValue);
         int topV = topCornerValues.get(iValue);
         int bottomV = bottomCornerValues.get(iValue);
+
+        //绘制普通矩形框
+        if (MyApp.MirrorX){
+            canvas.drawRect(new Rect(rightV,topV,leftV,bottomV),paint);
+        }else {
+            canvas.drawRect(new Rect(leftV,topV,rightV,bottomV),paint);
+        }
 
         canvas.drawRect(leftV, topV, rightV, bottomV, paint);
         if (!enroll) {

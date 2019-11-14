@@ -13,10 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bestom.ei_library.EIFace;
 import com.bestom.ei_library.commons.beans.UserInfoDBBean;
 import com.bestom.eiface.R;
 import com.bumptech.glide.Glide;
-import com.wf.wffrdualcamapp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +108,8 @@ public class RegisterDB_UserInforAdapter extends RecyclerView.Adapter<RegisterDB
         alertDialog.setNegativeButton("YES", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 // Write your code here to invoke NO event
-                wffrdualcamapp.deletePerson(record_id);
+//                wffrdualcamapp.deletePerson(record_id);
+                EIFace.deletePerson(record_id);
                 Toast.makeText(context, "Record Deleted", Toast.LENGTH_SHORT).show();
                 removeItem(position);
 

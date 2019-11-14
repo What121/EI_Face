@@ -25,7 +25,9 @@
         android:theme="@style/AppTheme.NoBar"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".activity.CameraActivity">
+        <activity android:name=".activity.CameraActivity"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

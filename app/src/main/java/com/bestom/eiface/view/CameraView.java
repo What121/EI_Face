@@ -14,12 +14,12 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.TextureView;
 
+import com.bestom.ei_library.EIFace;
 import com.bestom.eiface.Control.CameraController;
 import com.bestom.eiface.Control.CameraDataQueueController;
 import com.bestom.eiface.Handler.RegisterHandler;
 import com.bestom.eiface.R;
 import com.bestom.eiface.activity.CameraActivity;
-import com.wf.wffrdualcamapp;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -38,18 +38,17 @@ import static com.bestom.eiface.MyApp.MirrorX;
 public class CameraView extends TextureView implements TextureView.SurfaceTextureListener, Camera.PreviewCallback {
     private static final String TAG = "CameraView";
 
-    private RegisterHandler mRegisterHandler;
+//    private RegisterHandler mRegisterHandler;
     private CameraActivity cameraActivity;
     //初始化camera关键参数
     public byte[] cameraPreviewBuffer;
     private boolean cameraMode = true;
     private boolean cameraMirrorX = false;
     private boolean cameraVertical = true;
-    private String name = "";
+    private String msg = "";
     private boolean enroll = false;
 
-    private boolean isStartExecutionRunning = false;
-    private boolean isStartEnrollRunning = false;
+    private boolean isStartfalg = false;
 
     public CameraView(Context context) {
         this(context, null);
@@ -102,12 +101,13 @@ public class CameraView extends TextureView implements TextureView.SurfaceTextur
     }
 
     public void setRegisterHandler(RegisterHandler registerHandler) {
-        mRegisterHandler = registerHandler;
+//        mRegisterHandler = registerHandler;
     }
 
-    public void setEnrolled(String name, boolean enroll) {
-        this.name = name;
+    public void setEnrolled(String userinfo, boolean enroll) {
+        this.msg = userinfo;
         this.enroll = enroll;
+        isStartfalg=false;
     }
 
     @Override
@@ -188,51 +188,49 @@ public class CameraView extends TextureView implements TextureView.SurfaceTextur
 //            Log.i(TAG, "onPreviewFrame: from front IR camera");
 //            CameraDataQueueController.getInstance().putF(data, SystemClock.uptimeMillis());
             CameraDataQueueController.getInstance().putB(data, SystemClock.uptimeMillis());
+            Log.d(TAG, "B: "+cameraMode+"  "+SystemClock.uptimeMillis());
         } else {
 //            Log.i(TAG, "onPreviewFrame: from back color camera");
 //            CameraDataQueueController.getInstance().putB(data, SystemClock.uptimeMillis());
             CameraDataQueueController.getInstance().putF(data, SystemClock.uptimeMillis());
+            Log.d(TAG, "C: "+cameraMode+"  "+SystemClock.uptimeMillis());
         }
 
-        long startTime = System.currentTimeMillis();
-
+        if (!cameraMode){
+            long startTime = System.currentTimeMillis();
 //        Log.i(TAG, "onPreviewFrame: after cameraDetails");
-        final byte[][] imagesBufferArray = CameraDataQueueController.getInstance().getDualCameraPreview();
-        long endTime = System.currentTimeMillis();
+            final byte[][] imagesBufferArray = CameraDataQueueController.getInstance().getDualCameraPreview();
+            long endTime = System.currentTimeMillis();
 //        Log.i(TAG, "TIME TAKEN EXECUTION : " + (endTime - startTime) + "ms");
 
-        /* save image in folder */
-        if(imagesBufferArray!=null&&cameraActivity!=null) {
-            Log.i(TAG, "STATE : " + wffrdualcamapp.getState());
+            /* save image in folder */
+            if(imagesBufferArray!=null&&cameraActivity!=null) {
+//            Log.i(TAG, "STATE : " + wffrdualcamapp.getState());
+                Log.i(TAG, "STATE : " + EIFace.getState());
 
-            if (!enroll){
-                if (!isStartExecutionRunning) {
-                    StartExecutionThread startExecutionThread = new StartExecutionThread();
+                if (!isStartfalg) {
                     FrameInfo frameInfo = new FrameInfo();
                     frameInfo.clrFrame = Arrays.copyOf(imagesBufferArray[0], imagesBufferArray[0].length);
                     frameInfo.irFrame = Arrays.copyOf(imagesBufferArray[1], imagesBufferArray[1].length);
-                    frameInfo.name = "";
+                    if (enroll){
+                        frameInfo.msg = msg;
+                    }else {
+                        frameInfo.msg="";
+                    }
 
-                    startExecutionThread.execute(frameInfo);
+                    new StartExecutionThread().execute(frameInfo);
                 }
             }else {
-                if (!isStartEnrollRunning) {
-                    StartEnrollThread startEnrollThread = new StartEnrollThread();
-                    FrameInfo frameInfo = new FrameInfo();
-                    frameInfo.clrFrame = Arrays.copyOf(imagesBufferArray[0], imagesBufferArray[0].length);
-                    frameInfo.irFrame = Arrays.copyOf(imagesBufferArray[1], imagesBufferArray[1].length);
-                    frameInfo.name = name;
-
-                    startEnrollThread.execute(frameInfo);
-                }
+                Log.d(TAG, "onPreviewFrame: imagesBufferArray is null");
             }
         }
+
         camera.addCallbackBuffer(cameraPreviewBuffer);
 }
 
     public class FrameInfo {
         public byte[] irFrame, clrFrame;
-        public String name;
+        public String msg;
 
         public FrameInfo() {
 
@@ -244,63 +242,47 @@ public class CameraView extends TextureView implements TextureView.SurfaceTextur
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            isStartExecutionRunning = true;
+            isStartfalg = true;
             Log.d(TAG, "Execution onPreExecute: finished" );
         }
 
         @Override
         protected Void doInBackground(FrameInfo... frameInfos) {
 //            int flag = EIFace.startExecution(frameInfos[0].clrFrame, frameInfos[0].irFrame, CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT, frameInfos[0].name);
-            int flag = wffrdualcamapp.startExecution(frameInfos[0].clrFrame, frameInfos[0].irFrame, CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT, frameInfos[0].name);
-            cameraActivity.drawOutput(wffrdualcamapp.getFaceCoordinates(), CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT, enroll);
+//            int flag = wffrdualcamapp.startExecution(frameInfos[0].clrFrame, frameInfos[0].irFrame, CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT, frameInfos[0].name);
+//            cameraActivity.drawOutput(wffrdualcamapp.getFaceCoordinates(), CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT, enroll);
 
-            Log.d(TAG, "Execution doInBackground: finished" );
+            if (EIFace.getState()==0){
+                cameraActivity.drawOutput(null, CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT, enroll);
+            }else {
+                int flag = EIFace.startExecution(frameInfos[0].clrFrame, frameInfos[0].irFrame, CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT,frameInfos[0].msg);
+                cameraActivity.drawOutput(EIFace.getFaceCoordinates(), CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT, enroll);
+                if(enroll){
+//                Message message=new Message();
+//                message.what=flag;
+//                message.obj=frameInfos[0].clrFrame;
+                    //Main ui
+                    cameraActivity.updateUI(flag,frameInfos[0].clrFrame);
+
+//                if (mRegisterHandler!=null)
+//                    mRegisterHandler.sendMessage(message);
+                    Log.d(TAG, "Enroll : flag" +flag);
+                }
+                Log.d(TAG, "Execution doInBackground: finished" );
+            }
+
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            isStartExecutionRunning = false;
+            isStartfalg = false;
             Log.d(TAG, "Execution onPostExecute: finished" );
         }
 
     }
 
-    public class StartEnrollThread extends AsyncTask<FrameInfo, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            isStartEnrollRunning = true;
-            Log.d(TAG, "Enroll onPreExecute: finished" );
-        }
-
-        @Override
-        protected Void doInBackground(FrameInfo... frameInfos) {
-            int flag = wffrdualcamapp.startExecution(frameInfos[0].clrFrame, frameInfos[0].irFrame, CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT, frameInfos[0].name);
-
-            Log.d(TAG, "Enroll doInBackground: flag" +flag);
-
-            Message message=new Message();
-            message.what=flag;
-            message.obj=frameInfos[0].clrFrame;
-            //Main ui
-            cameraActivity.drawOutput(null, CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT, enroll);
-            if (mRegisterHandler!=null)
-                mRegisterHandler.sendMessage(message);
-            Log.d(TAG, "Enroll doInBackground: finished" );
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            isStartEnrollRunning = false;
-            Log.d(TAG, "Enroll onPostExecute: finished" );
-        }
-
-    }
 
 
 }

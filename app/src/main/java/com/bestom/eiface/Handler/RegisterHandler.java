@@ -5,11 +5,13 @@ import android.os.Message;
 
 import com.bestom.eiface.activity.RegisterActivity;
 
+import java.lang.ref.WeakReference;
+
 public class RegisterHandler extends Handler {
-    private RegisterActivity mRegisterActivity;
+    private WeakReference<RegisterActivity>  mRegisterActivityWeakReference;
 
     public RegisterHandler(RegisterActivity registerActivity) {
-        mRegisterActivity = registerActivity;
+        mRegisterActivityWeakReference = new WeakReference<>(registerActivity);
     }
 
     @Override
@@ -17,13 +19,11 @@ public class RegisterHandler extends Handler {
         super.handleMessage(msg);
         byte[] clrFrame= (byte[]) msg.obj;
         switch (msg.what){
-            case -1:
-
-            case 0:
-
-                mRegisterActivity.updateUI(msg.what,clrFrame);
+            case 99:
+                mRegisterActivityWeakReference.get().finish();
                 break;
             default:
+                mRegisterActivityWeakReference.get().updateUI(msg.what,clrFrame);
                 break;
         }
     }

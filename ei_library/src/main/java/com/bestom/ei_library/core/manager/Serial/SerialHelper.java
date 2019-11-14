@@ -1,4 +1,4 @@
-package com.bestom.ei_library.core.manager.serial;
+package com.bestom.ei_library.core.manager.Serial;
 
 import android.util.Log;
 

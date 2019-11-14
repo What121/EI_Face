@@ -7,14 +7,11 @@ import android.os.Handler;
 import android.os.PowerManager;
 import android.util.Log;
 
+import com.bestom.ei_library.EIFace;
 import com.bestom.ei_library.commons.constant.SerialCmdCode;
 import com.bestom.ei_library.commons.constant.StatusCode;
-import com.bestom.ei_library.commons.utils.AssetFileUtil;
-import com.bestom.ei_library.commons.utils.SPUtil;
 import com.bestom.ei_library.core.api.SerialApi;
 import com.bestom.ei_library.core.service.Interface.Listener.RespSampleListener;
-import com.wf.wffrdualcamapp;
-import com.wf.wffrjni;
 
 public class MyApp extends Application {
     private static final String TAG = "MyApp";
@@ -31,8 +28,8 @@ public class MyApp extends Application {
     public static PowerManager.WakeLock mWakeLock;
     public static SerialApi mSerialApi;
 
-    private String[] binfiles = {"b1.bin", "f160tm.bin","p0.bin", "p1tc.bin", "p2tc.bin", "p3tc.bin", "p4tc.bin", "q31tm.bin","q103tm.bin", "s11tm.bin"};
-    private String[] configfiles = {"ei_config"};
+//    private String[] binfiles = {"b1.bin", "f160tm.bin","p0.bin", "p1tc.bin", "p2tc.bin", "p3tc.bin", "p4tc.bin", "q31tm.bin","q103tm.bin", "s11tm.bin"};
+//    private String[] configfiles = {"ei_config"};
 
     @Override
     public void onCreate() {
@@ -45,6 +42,43 @@ public class MyApp extends Application {
         checkScreanLight();
     }
 
+    @SuppressLint("InvalidWakeLockTag")
+    private void init(){
+        mContext=this;
+        mSerialApi=new SerialApi();
+
+        //初始化算法、串口
+        DualFilePath = EIFace.Initialize(mContext);
+
+//        copyAssets();
+//        initwff();
+//        SerialManager.getInstance().turnOn();
+
+        mtimehandler=new Handler();
+        pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        mWakeLock= pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, TAG);
+        //设置屏幕保持常亮，需要释放release（）
+        mWakeLock.setReferenceCounted(false);
+        mWakeLock.acquire();
+
+        Log.d(TAG, "init: finished");
+    }
+
+    //region copyAssets() initwff()
+    /*
+    private void copyAssets(){
+        //.bin（二进制）文件
+        if(!new AssetFileUtil(mContext).checkFilesExist(binfiles,1)){
+            (new AssetFileUtil(mContext)).copyFilesFromAssets(binfiles,1);//copies files from assests to data file
+        }
+        //配置文件
+        if(!new AssetFileUtil(mContext).checkFilesExist(configfiles,0)){
+            (new AssetFileUtil(mContext)).copyFilesFromAssets(configfiles,0);//copies files from assests to data file
+        }
+    }
+    */
+
+    /*
     private void initwff(){
         wffrdualcamapp.setState(1);
         wffrdualcamapp.finish_state = 1;
@@ -65,39 +99,8 @@ public class MyApp extends Application {
         //wffrjni.SetSingleCamSpoofThreshold(-2);
         //wffrjni.SetAntiSpoofBlockingFlag(0);
     }
-
-    @SuppressLint("InvalidWakeLockTag")
-    private void init(){
-        mContext=this;
-        mSerialApi=new SerialApi();
-
-        copyAssets();
-        //
-        initwff();
-        //初始化算法、串口
-//        DualFilePath = EIFace.Initialize(mContext);
-//        SerialManager.getInstance().turnOn();
-
-        mtimehandler=new Handler();
-        pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        mWakeLock= pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, TAG);
-        //设置屏幕保持常亮，需要释放release（）
-        mWakeLock.setReferenceCounted(false);
-        mWakeLock.acquire();
-
-        Log.d(TAG, "init: finished");
-    }
-
-    private void copyAssets(){
-        //.bin（二进制）文件
-        if(!new AssetFileUtil(mContext).checkFilesExist(binfiles,1)){
-            (new AssetFileUtil(mContext)).copyFilesFromAssets(binfiles,1);//copies files from assests to data file
-        }
-        //配置文件
-        if(!new AssetFileUtil(mContext).checkFilesExist(configfiles,0)){
-            (new AssetFileUtil(mContext)).copyFilesFromAssets(configfiles,0);//copies files from assests to data file
-        }
-    }
+    */
+    //endregion
 
     private void checkScreanLight(){
         mSerialApi.setStatus(SerialCmdCode.SERIAL_CMD_STATUS, true, new RespSampleListener<String>() {

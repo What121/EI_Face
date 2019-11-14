@@ -85,7 +85,7 @@ public class CameraDataQueueController {
     }
 
     private boolean isSameTime() {
-        if (infoColor.isNews && infoFrared.isNews && Math.abs(infoColor.time - infoFrared.time) < 10) {
+        if (infoColor.isNews && infoFrared.isNews && Math.abs(infoColor.time - infoFrared.time) < 10000) {
             return true;
         }
         return false;

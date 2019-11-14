@@ -1,11 +1,15 @@
 package com.bestom.ei_library;
 import android.content.Context;
+import android.database.Cursor;
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.bestom.ei_library.commons.constant.EICode;
 import com.bestom.ei_library.commons.utils.AssetFileUtil;
 import com.bestom.ei_library.commons.utils.FLogs;
 import com.bestom.ei_library.commons.utils.SPUtil;
-import com.bestom.ei_library.core.manager.serial.SerialManager;
+import com.bestom.ei_library.core.api.DBApi;
+import com.bestom.ei_library.core.manager.Serial.SerialManager;
 import com.wf.wffrdualcamapp;
 import com.wf.wffrjni;
 
@@ -24,11 +28,13 @@ public class EIFace {
     public static String Initialize(Context context){
         mContext=context;
 
-        openSerial();
         //检测资源文件
-//        copyAssets();
+        copyAssets();
         //初始化算法接口的一些参数
-//        initwff();
+        initwff();
+        //initDB()
+        initDB();
+        openSerial();
         //log control
         setLog(true,0);
 
@@ -48,13 +54,35 @@ public class EIFace {
         wffrdualcamapp.setState(i);
     }
 
-    public static int startExecution(byte[] clrFrame, byte[] irFrame, int frameWidth, int frameHeight, String name){
+    public static int startExecution(byte[] clrFrame, byte[] irFrame, int frameWidth, int frameHeight){
+        return startExecution(clrFrame,irFrame,frameWidth,frameHeight,"");
+    }
+
+    public static int startExecution(byte[] clrFrame, byte[] irFrame, int frameWidth, int frameHeight, String msg){
         try {
             semaphore.acquire();
-            int i = wffrdualcamapp.startExecution(clrFrame, irFrame, frameWidth, frameHeight, name);
-
-            if (!TextUtils.isEmpty(name)){
-                int RecordID = wffrjni.getLastAddedRecord();
+            int i = -3;
+            if (TextUtils.isEmpty(msg)) {
+                i = wffrdualcamapp.startExecution(clrFrame, irFrame, frameWidth, frameHeight, msg);
+            }else {
+                String id = msg.substring(msg.lastIndexOf(',')+1).trim();
+                String name = msg.substring(0, msg.lastIndexOf(',')).trim();
+                if (DBApi.queryPersonInfoByID(id).getCount()<=0){
+                    //算法注册
+                    i = wffrdualcamapp.startExecution(clrFrame, irFrame, frameWidth, frameHeight, name);
+                    int RecordID = wffrjni.getLastAddedRecord();
+                    Log.d(TAG, "register RecordID: "+RecordID);
+                    //算法注册通过
+                    if (i==0){
+                        if (RecordID>=0){
+                            DBApi.insertPersonInfo(RecordID,id,name);
+                        }else {
+                            return EICode.DB_ERROR_RECORDID.getCode();
+                        }
+                    }
+                }else {
+                    return EICode.DB_ERROR_ID.getCode();
+                }
             }
             semaphore.release();
             return i;
@@ -62,6 +90,10 @@ public class EIFace {
             e.printStackTrace();
             return -1;
         }
+    }
+
+    public static int stopExecution(){
+        return wffrdualcamapp.stopExecution();
     }
 
     public static int getFinishstate(){
@@ -76,8 +108,16 @@ public class EIFace {
         return wffrdualcamapp.t2;
     }
 
+    public static float GetRecognitionThreshold(){
+        return wffrjni.GetRecognitionThreshold();
+    }
+
     public static float[] getConfidence(){
         return wffrdualcamapp.getConfidence();
+    }
+
+    public static Cursor getALL(){
+        return DBApi.queryAll();
     }
 
     public static String[] getNames(){
@@ -162,7 +202,7 @@ public class EIFace {
         //设置识别门槛
         wffrjni.SetRecognitionThreshold( SPUtil.getValue(mContext,"threshold", (int) wffrjni.GetRecognitionThreshold()) );
         //最小人脸占屏幕百分比
-        wffrjni.SetMinFaceDetectionSizePercent(5);
+        wffrjni.SetMinFaceDetectionSizePercent(10);
         //wffrjni.SetVerbose("",1);
         //wffrjni.setAndroidVerbose(0);
 //        wffrjni.EnableImageSaveForDebugging(1);
@@ -170,6 +210,10 @@ public class EIFace {
         //wffrjni.SetDualcamBGReject(0);
         //wffrjni.SetSingleCamSpoofThreshold(-2);
         //wffrjni.SetAntiSpoofBlockingFlag(0);
+    }
+
+    private static void initDB(){
+        DBApi.init(mContext);
     }
 
 

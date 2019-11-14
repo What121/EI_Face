@@ -12,10 +12,13 @@ public class Const {
     public static final long DEF_TIMEOUT_30 = 30 * 1000; //30 * 1000ms
     public static final long DEF_TIMEOUT_1000 = 1000 * 1000; //1000 * 1000ms
 
+    public static final String H = "1";
+    public static final String L = "0";
+
     public static final String Serial_Send_MAGIC = "555A";
     public static final String Serial_Replay_MAGIC = "55A5";
 
-
+    public static final String REBOOT="reboot";
 
 
 }

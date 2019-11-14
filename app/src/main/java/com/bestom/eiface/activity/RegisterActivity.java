@@ -18,11 +18,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bestom.ei_library.EIFace;
+import com.bestom.ei_library.commons.constant.EICode;
 import com.bestom.eiface.Control.CameraViewController;
 import com.bestom.eiface.Handler.RegisterHandler;
 import com.bestom.eiface.MyApp;
 import com.bestom.eiface.R;
-import com.wf.wffrdualcamapp;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -64,7 +65,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         mRegisterHandler=new RegisterHandler(this);
 
         initview();
-
     }
 
     private void initview(){
@@ -85,12 +85,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void finish() {
-        super.finish();
         //region 结束注册初始化为识别模式
         initrecognize();
         mRegisterHandler=null;
-
         overridePendingTransition(R.anim.bottom_silent, R.anim.bottom_out);
+
+        Log.d(TAG, "finish: ");
+        super.finish();
     }
 
     @Override
@@ -113,7 +114,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private void initrecognize(){
         //设置当前算法模式为1
-        wffrdualcamapp.setState(1);
+//        wffrdualcamapp.setState(1);
+        EIFace.setState(1);
         CameraViewController.getInstant().frontCameraView.setEnrolled("",false);
         CameraViewController.getInstant().frontCameraView.setRegisterHandler(null);
         CameraViewController.getInstant().backCameraView.setEnrolled("",false);
@@ -122,7 +124,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private void initenroll(String registerInfo){
         //设置当前算法模式为2
-        wffrdualcamapp.setState(2);
+//        wffrdualcamapp.setState(2);
+        EIFace.setState(2);
         CameraViewController.getInstant().frontCameraView.setEnrolled(registerInfo,true);
         CameraViewController.getInstant().frontCameraView.setRegisterHandler(mRegisterHandler);
         CameraViewController.getInstant().backCameraView.setEnrolled(registerInfo,true);
@@ -135,19 +138,20 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void DoRegister() {
         //region checkEditView
         String name = nameEdit.getText().toString().trim();
-        String NO = noEdit.getText().toString().trim();
+        String ID = noEdit.getText().toString().trim();
         if (TextUtils.isEmpty(name)) {
             showMsg("姓名不能为空！");
             return ;
         }
-        if (TextUtils.isEmpty(NO)) {
+        if (TextUtils.isEmpty(ID)) {
             showMsg("身份证号不能为空！");
             return ;
         }
         //endregion
         //region 初始化注册
-        String registInfo=name+","+NO;
+        String registInfo=name+","+ID;
         initenroll(registInfo);
+        mRegisterHandler.sendEmptyMessageDelayed(99,10000);
         //endregion
 
     }
@@ -179,9 +183,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         //endregion
 
         //region 判断是否注册成功
-        if (what==0){
+        if (what==EICode.DB_SUCCESS.getCode()){
             Log.d(TAG, "updateUI: 注册成功");
-            this.finish();
+//            showMsg(EICode.DB_SUCCESS.getMsg());
+//            mRegisterHandler.sendEmptyMessageDelayed(110,2000);
+        }else if (what== EICode.DB_ERROR_ID.getCode()){
+            Log.d(TAG, "updateUI: ID已注册");
+//            showMsg(EICode.DB_ERROR_ID.getMsg());
+//            mRegisterHandler.sendEmptyMessageDelayed(110,3000);
+        }else if (what==EICode.DB_ERROR_RECORDID.getCode()){
+            Log.d(TAG, "updateUI: recordid 异常");
+//            showMsg(EICode.DB_ERROR_RECORDID.getMsg());
+//            mRegisterHandler.sendEmptyMessageDelayed(110,2000);
         }
         //endregion
 
