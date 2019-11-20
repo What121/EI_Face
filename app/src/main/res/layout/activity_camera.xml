@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:text="系统"
+            android:text="DB"
             android:textColor="@color/colorLightGreen"
             android:textSize="22sp" />
 
@@ -105,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:msv_cameraFront="false"
-                app:msv_cameraMirrorX="true" />
+                app:msv_cameraMirrorX="false" />
 
             <com.bestom.eiface.view.CameraDetectView
                 android:visibility="gone"

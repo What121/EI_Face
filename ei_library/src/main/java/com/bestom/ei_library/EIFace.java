@@ -3,6 +3,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.TextureView;
 
 import com.bestom.ei_library.commons.constant.EICode;
 import com.bestom.ei_library.commons.utils.AssetFileUtil;
@@ -21,12 +22,21 @@ public class EIFace {
 
     private static String[] binfiles = {"b1.bin", "f160tm.bin","p0.bin", "p1tc.bin", "p2tc.bin", "p3tc.bin", "p4tc.bin", "q31tm.bin","q103tm.bin", "s11tm.bin"};
     private static String[] configfiles = {"ei_config"};
-    public static String DualFilePath;
+    private static String DualFilePath;
+    private static String datapath ;
+    private static String filepath ;
+    private static String cachepath ;
 
     static Semaphore semaphore = new Semaphore(1);
 
     public static String Initialize(Context context){
         mContext=context;
+        datapath=AssetFileUtil.getInstance(mContext).getDatapath();
+        filepath=AssetFileUtil.getInstance(mContext).getFilepath();
+        cachepath=AssetFileUtil.getInstance(mContext).getCachepath();
+        DualFilePath=AssetFileUtil.getInstance(mContext).getDualFilePath();
+
+
 
         //检测资源文件
         copyAssets();
@@ -34,7 +44,8 @@ public class EIFace {
         initwff();
         //initDB()
         initDB();
-        openSerial();
+//        openSerial();
+
         //log control
         setLog(true,0);
 
@@ -43,6 +54,22 @@ public class EIFace {
 
     public static void Release(){
         closeSerial();
+    }
+
+    public static String getDualFilePath() {
+        return DualFilePath;
+    }
+
+    public static String getDatapath() {
+        return datapath;
+    }
+
+    public static String getFilepath() {
+        return filepath;
+    }
+
+    public static String getCachepath() {
+        return cachepath;
     }
 
     //region wffrdualcamapp api
@@ -69,16 +96,20 @@ public class EIFace {
                 String name = msg.substring(0, msg.lastIndexOf(',')).trim();
                 if (DBApi.queryPersonInfoByID(id).getCount()<=0){
                     //算法注册
-                    i = wffrdualcamapp.startExecution(clrFrame, irFrame, frameWidth, frameHeight, name);
+                    i = wffrdualcamapp.startExecution(clrFrame, irFrame, frameWidth, frameHeight, id);
                     int RecordID = wffrjni.getLastAddedRecord();
+                    boolean flag = AssetFileUtil.getInstance(mContext).checkFilesExist(new String[]{"pid"+RecordID},1);
                     Log.d(TAG, "register RecordID: "+RecordID);
                     //算法注册通过
                     if (i==0){
-                        if (RecordID>=0){
-                            DBApi.insertPersonInfo(RecordID,id,name);
-                        }else {
-                            return EICode.DB_ERROR_RECORDID.getCode();
-                        }
+                        //region 检查太慢，总是卡死 检查注册的资源文件是否存在,并写入DB 可靠操作
+//                        if (flag) {
+//                            DBApi.insertPersonInfo(RecordID, id, name);
+//                        }else {
+//                            return EICode.DB_ERROR.getCode();
+//                        }
+                        //endregion
+                        DBApi.insertPersonInfo(RecordID, id, name);
                     }
                 }else {
                     return EICode.DB_ERROR_ID.getCode();
@@ -96,8 +127,51 @@ public class EIFace {
         return wffrdualcamapp.stopExecution();
     }
 
-    public static int getFinishstate(){
-        return wffrdualcamapp.finish_state;
+    public static int EnrollFromJpegFile(String imageFileName, String msg){
+        try {
+            semaphore.acquire();
+            int i = -3;
+            String id = msg.substring(msg.lastIndexOf(',')+1).trim();
+            String name = msg.substring(0, msg.lastIndexOf(',')).trim();
+            if (DBApi.queryPersonInfoByID(id).getCount()<=0){
+                //算法注册
+                i = wffrdualcamapp.runEnrollFromJpegFile(imageFileName, id);
+                Log.d(TAG, "register RecordID: "+i);
+                //算法注册通过
+                if (i>=0){
+                    //region 检查注册的资源文件是否存在
+                    if (AssetFileUtil.getInstance(mContext).checkFilesExist(new String[]{"pid"+i},1)) {
+                        DBApi.insertPersonInfo(i, id, name);
+                    }else {
+                        i=EICode.DB_ERROR.getCode();
+                    }
+                    //endregion
+                }else {
+                    i=EICode.DB_ERROR_RECORDID.getCode();
+                }
+            }else {
+                i=EICode.DB_ERROR_ID.getCode();
+            }
+            semaphore.release();
+
+            semaphore.acquire();
+            wffrdualcamapp.updateFromPCDB();
+            semaphore.release();
+            Log.d(TAG, "registerImg return: "+i);
+            return i;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+
+    public static void setFinishState(int val){
+        wffrdualcamapp.setFinishState(val);
+    }
+
+    public static int getFinishState(){
+        return wffrdualcamapp.getFinishState();
     }
 
     public static int[][] getFaceCoordinates(){
@@ -108,8 +182,53 @@ public class EIFace {
         return wffrdualcamapp.t2;
     }
 
-    public static float GetRecognitionThreshold(){
-        return wffrjni.GetRecognitionThreshold();
+    /**
+     * set asset path
+     * @param AssetPath
+     */
+    public static void setAssetPath(String AssetPath){
+        wffrdualcamapp.setAssetPath(DualFilePath);
+    }
+
+    public static String getAssetPath(){
+        return wffrdualcamapp.getAssetPath();
+    }
+
+    /**
+     *  Should be set before initialize() API is called
+     *  SetMinFaceDetectionSizePercent
+     * @param val
+     * @return
+     */
+    public static int SetMinFaceDetectionSizePercent(int val){
+        SPUtil.putValue(mContext,"facemodel", val);
+        return wffrjni.SetMinFaceDetectionSizePercent(val);
+    }
+
+    /**
+     * etMinFaceDetectionSizePercent
+     * @return
+     */
+    public static int GetMinFaceDetectionSizePercent(){
+        return wffrjni.GetMinFaceDetectionSizePercent();
+    }
+
+    /**
+     * 设置识别门槛
+     * @param value
+     * @return
+     */
+    public static int SetRecognitionThreshold(int value){
+        SPUtil.putValue(mContext,"threshold", value);
+        return wffrjni.SetRecognitionThreshold(value);
+    }
+
+    /**
+     * 获取 识别门槛
+     * @return
+     */
+    public static int GetRecognitionThreshold(){
+        return SPUtil.getValue(mContext,"threshold", (int) wffrjni.GetRecognitionThreshold());
     }
 
     public static float[] getConfidence(){
@@ -120,8 +239,19 @@ public class EIFace {
         return DBApi.queryAll();
     }
 
-    public static String[] getNames(){
-        return wffrdualcamapp.getNames();
+    public static String getNames(){
+        String id=getIDs();
+        if (!TextUtils.isEmpty(id.trim())){
+            return DBApi.queryPersonNameByID(id);
+        }
+        return "";
+    }
+
+    public static String getIDs(){
+        if (wffrdualcamapp.getNames().length!=0){
+            return wffrdualcamapp.getNames()[0];
+        }
+        return "";
     }
 
     public static long getTimeLeft(){
@@ -182,27 +312,28 @@ public class EIFace {
 
     private static void copyAssets(){
         //.bin（二进制）文件
-        if(!new AssetFileUtil(mContext).checkFilesExist(binfiles,1)){
-            (new AssetFileUtil(mContext)).copyFilesFromAssets(binfiles,1);//copies files from assests to data file
+        if(!AssetFileUtil.getInstance(mContext).checkFilesExist(binfiles,1)){
+            (AssetFileUtil.getInstance(mContext)).copyFilesFromAssets(binfiles,1);//copies files from assests to data file
         }
         //配置文件
-        if(!new AssetFileUtil(mContext).checkFilesExist(configfiles,0)){
-            (new AssetFileUtil(mContext)).copyFilesFromAssets(configfiles,0);//copies files from assests to data file
+        if(!AssetFileUtil.getInstance(mContext).checkFilesExist(configfiles,0)){
+            (AssetFileUtil.getInstance(mContext)).copyFilesFromAssets(configfiles,0);//copies files from assests to data file
         }
+
     }
 
-    private static void initwff(){
+    public static void initwff(){
         setState(1);
-        wffrdualcamapp.finish_state = 1;
 
-        DualFilePath = new AssetFileUtil(mContext).getDualFilePath();
+        setFinishState(1);
+
         Log.d(TAG, "DualFilePath: "+DualFilePath);
-        wffrdualcamapp.setAssetPath(DualFilePath);
+        setAssetPath(DualFilePath);
 
         //设置识别门槛
-        wffrjni.SetRecognitionThreshold( SPUtil.getValue(mContext,"threshold", (int) wffrjni.GetRecognitionThreshold()) );
+        SetRecognitionThreshold(SPUtil.getValue(mContext,"threshold",(int) GetRecognitionThreshold()));
         //最小人脸占屏幕百分比
-        wffrjni.SetMinFaceDetectionSizePercent(10);
+        SetMinFaceDetectionSizePercent(SPUtil.getValue(mContext,"facemodel",10));
         //wffrjni.SetVerbose("",1);
         //wffrjni.setAndroidVerbose(0);
 //        wffrjni.EnableImageSaveForDebugging(1);

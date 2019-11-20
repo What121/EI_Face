@@ -272,8 +272,6 @@ public class RegisterDBActivity extends AppCompatActivity {
             searchView.setIconified(true);
             return;
         }
-//        wffrdualcamapp.setState(1);
-        EIFace.setState(1);
         super.onBackPressed();
     }
 }

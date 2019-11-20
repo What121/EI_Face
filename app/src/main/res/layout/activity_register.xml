@@ -26,7 +26,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
             android:text="取消"
-            android:textSize="32sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/register_tv_submit"
@@ -38,15 +38,15 @@
             android:layout_marginRight="30dp"
             android:layout_marginTop="20dp"
             android:text="完成"
-            android:textSize="32sp" />
+            android:textSize="20sp" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/register_headimg"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            android:src="@mipmap/default_face"
+            android:src="@drawable/default_face"
             app:civ_border_color="@color/colorAccent"
             app:civ_border_width="2dp" />
 
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/register_headimg"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
             <TextView
@@ -67,13 +67,14 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
                 android:text="姓  名:"
-                android:textSize="32sp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/register_edit_name"
-                android:layout_width="400dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:textSize="32sp" />
+                android:textAlignment="center"
+                android:textSize="15sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -82,8 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/name_layout"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-
+            android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
             <TextView
@@ -93,13 +93,14 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
                 android:text="身份证号:"
-                android:textSize="32sp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/register_edit_no"
-                android:layout_width="400dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:textSize="32sp" />
+                android:textAlignment="center"
+                android:textSize="15sp" />
         </LinearLayout>
 
     </RelativeLayout>

@@ -20,7 +20,7 @@ public class wffrdualcamapp {
     public static long startTime;
     public static long timeRemaining = 0;
     public static long t2;
-    static String assetPath = "";
+    private static String assetPath = "";
     static int Process_Running_Error = 50;
     static Object[] DBnames;
     static int[] records;
@@ -30,7 +30,7 @@ public class wffrdualcamapp {
     private static float[] confidence;
     static Semaphore semaphore = new Semaphore(1);
 
-    public static int finish_state = 1;
+    private static int finish_state = 1;
 
 
     public static int startExecution(byte[] cameraDataColor, byte[] cameraDataIR, int frameWidth, int frameHeight, String name)  {
@@ -72,7 +72,7 @@ public class wffrdualcamapp {
                     if (init != 0) {
                         System.out.println("WFFRJNI: Init Recognize Error: " + init);
                         semaphore.release();
-                        return 3;
+                        return -3;
                     }
 
                     System.out.println("WFFRJNI: Recognize Init");
@@ -107,7 +107,7 @@ public class wffrdualcamapp {
                         System.out.println("WFFRJNI: Init Error: " + init);
                         Log.e(TAG, "startExecution: WFFRJNI: Init Error: " + init );
                         semaphore.release();
-                        return 3;
+                        return -3;
                     }
 
                     System.out.println("WFFRJNI: Enroll Init");
@@ -120,7 +120,7 @@ public class wffrdualcamapp {
                         System.out.println("WFFRJNI: Adding Record Error: " + addRec);
                         Log.e(TAG, "startExecution: WFFRJNI: Adding Record Error: " + addRec );
                         semaphore.release();
-                        return 2;
+                        return -2;
                     }
                     Log.d(TAG, "startExecution: WFFRJNI: wffrjni.addRecord finish" );
                     frInitialized = 1;
@@ -168,13 +168,67 @@ public class wffrdualcamapp {
             return 0;
         } else {
             semaphore.release();
-            return -2;
+            return -4;
         }
     }
 
+    public static int runEnrollFromJpegFile(String imageFileName, String name) {
+        try {
+            semaphore.acquire();
+            int recordID;
+            if (currentState > 0 && frInitialized == 1) {
+                System.out.println("WFFRJNI: Video mode already running, stopping the current process and release resources.");
+                System.out.println("WFFRJNI: Release");
+                wffrjni.Release();
+                frInitialized = 0;
+                currentState = 0;
+                state = 0;
+            }
+
+            if (assetPath != null && !assetPath.equals("")) {
+
+                int init = wffrjni.initialize(assetPath, 0, 0, 0, 1, 0);
+                if (init != 0) {
+                    System.out.println("WFFRJNI: Init Error: " + init);
+                    semaphore.release();
+                    return -3;
+                }
+                String lastName = "";
+                System.out.println("WFFRJNI: Enroll Init");
+                if (name != null && name.contains(" ")) {
+                    lastName = name.substring(name.lastIndexOf(' '));
+                    name = name.substring(0, name.lastIndexOf(' '));
+
+                }
+
+                int addRec = wffrjni.addRecord(name, lastName);
+                if (addRec != 0) {
+                    System.out.println("WFFRJNI: Adding Record Error: " + addRec);
+                    semaphore.release();
+                    return -2;
+                }
+                faceCoordinates = wffrjni.enrollFromImageFile(imageFileName);
+                names = wffrjni.nameValues();
+                confidence = wffrjni.confidenceValues();
+                recordID=wffrjni.getLastAddedRecord();
+                wffrjni.Release();
+
+                semaphore.release();
+                return recordID;
+            } else {
+                semaphore.release();
+                return -1;
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return -4;
+        }
+
+
+    }
+
     /** Force stop recognition/enroll process and release engine instance**/
-    public static int stopExecution()
-    {
+    public static int stopExecution() {
         try {
             semaphore.acquire();
             if (frInitialized == 1)
@@ -192,12 +246,45 @@ public class wffrdualcamapp {
         }
     }
 
+    public static int updateFromPCDB() {
+        try {
+            semaphore.acquire();
+            if (currentState > 0 && frInitialized == 1) {
+                System.out.println("WFFRJNI: Video mode already running, stopping the current process and release resources.");
+                System.out.println("WFFRJNI: Release");
+                wffrjni.Release();
+                frInitialized = 0;
+                currentState = 0;
+                state = 0;
+            }
+
+            if (assetPath != null && !assetPath.equals("")) {
+                int init = wffrjni.initialize(assetPath, 0, 0, 0, 0, 0);
+                if (init != 0) {
+                    System.out.println("WFFRJNI: Init Recognize Error: " + init);
+                    semaphore.release();
+                    return 3;
+                }
+
+                wffrjni.Release();
+
+                semaphore.release();
+                return 0;
+            } else {
+                semaphore.release();
+                return 1;
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
     public static void releaseEngine(){
         wffrjni.Release();
         state = 0;
         frInitialized = 0;
     }
-
 
 
     public static int getDatabase() {
@@ -235,6 +322,10 @@ public class wffrdualcamapp {
         }       
     }
 
+    public static void setFinishState(int val) {
+        finish_state = val ;
+    }
+
     public static int getFinishState() {
         return finish_state;
     }
@@ -258,6 +349,10 @@ public class wffrdualcamapp {
 
     public static void setAssetPath(String path) {
         assetPath = path;
+    }
+
+    public static String getAssetPath() {
+        return assetPath;
     }
 
     public static long getTimeLeft() {
@@ -381,42 +476,5 @@ public class wffrdualcamapp {
         }
     }
 
-
-    public static int updateFromPCDB()
-    {
- 	try {
-            	semaphore.acquire();
-		 if (currentState > 0 && frInitialized == 1) {
-		    System.out.println("WFFRJNI: Video mode already running, stopping the current process and release resources.");
-		    System.out.println("WFFRJNI: Release");
-		    wffrjni.Release();
-		    frInitialized = 0;
-		    currentState = 0;
-		    state = 0;
-		}
-
-		if (assetPath != null && !assetPath.equals("")) {
-
-		    int init = wffrjni.initialize(assetPath, 0, 0, 0, 0, 0);
-		    if (init != 0) {
-			System.out.println("WFFRJNI: Init Recognize Error: " + init);
-			semaphore.release();
-			return 3;
-		    }
-
-            wffrjni.Release();
-
-		    semaphore.release();
-		    return 0;
-		} else {
-		   semaphore.release();
-		   return 1;
-		}
-	} catch (InterruptedException e) {
-            e.printStackTrace();
-   	     return 1;
-        }
-       
-    }
 
 }

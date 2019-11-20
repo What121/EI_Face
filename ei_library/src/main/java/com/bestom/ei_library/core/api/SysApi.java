@@ -1,14 +1,21 @@
 package com.bestom.ei_library.core.api;
 
+import android.content.Context;
+
 import com.bestom.ei_library.core.manager.File.FilesManager;
+import com.bestom.ei_library.core.manager.OTA.OTAManager;
 import com.bestom.ei_library.core.manager.Shell.ShellManager;
+
+import java.io.File;
 
 import static com.bestom.ei_library.commons.constant.Const.REBOOT;
 
 public class SysApi extends BaseApi {
     private ShellManager mShellManager;
+    private Context mContext;
 
-    public SysApi(){
+    public SysApi(Context context){
+        mContext=context;
         mShellManager=new ShellManager();
     }
 
@@ -31,6 +38,40 @@ public class SysApi extends BaseApi {
         return FilesManager.getInstance().readPower();
     }
 
+    /**
+     * system function
+     */
+    public void installPackage(File packageFile){
+        OTAManager.getInstance(mContext).installPackage(packageFile);
+    }
+
+    public boolean checkRKimage(String path){
+        return  OTAManager.getInstance(mContext).checkRKimage(path);
+    }
+
+    public String getCurrentFirmwareVersion(){
+        return OTAManager.getInstance(mContext).getCurrentFirmwareVersion();
+    }
+
+    public String getProductName(){
+        return OTAManager.getInstance(mContext).getProductName();
+    }
+
+    public String getSystemVersion(){
+        return OTAManager.getInstance(mContext).getSystemVersion();
+    }
+
+    public String getProductSN(){
+        return OTAManager.getInstance(mContext).getProductSN();
+    }
+
+    public String getImageVersion(String path){
+        return OTAManager.getInstance(mContext).getImageVersion(path);
+    }
+
+    public String getImageProductName(String path){
+        return OTAManager.getInstance(mContext).getImageProductName(path);
+    }
 
     //region ***mShellManager control gpio is hide ,use FilesManager to control gpio file code
 //    /**

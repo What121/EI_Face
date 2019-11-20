@@ -5,4 +5,44 @@
         <attr name="msv_cameraMirrorX" format="boolean" />
         <attr name="msv_cameraVertical" format="boolean" />
     </declare-styleable>
+
+    <string-array name="face_key">
+        <item>0</item>
+        <item>0.1</item>
+        <item>0.2</item>
+        <item>0.3</item>
+        <item>0.4</item>
+        <item>0.5</item>
+        <item>0.6</item>
+        <item>0.7</item>
+        <item>0.8</item>
+        <item>0.9</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="face_model">
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+        <item>90</item>
+    </string-array>
+
+    <string-array name="pass_no">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+
+
 </resources>

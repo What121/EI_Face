@@ -7,7 +7,6 @@ import android.hardware.Camera;
 import android.opengl.GLES11Ext;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.os.Message;
 import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.util.Base64;
@@ -17,7 +16,6 @@ import android.view.TextureView;
 import com.bestom.ei_library.EIFace;
 import com.bestom.eiface.Control.CameraController;
 import com.bestom.eiface.Control.CameraDataQueueController;
-import com.bestom.eiface.Handler.RegisterHandler;
 import com.bestom.eiface.R;
 import com.bestom.eiface.activity.CameraActivity;
 
@@ -98,10 +96,6 @@ public class CameraView extends TextureView implements TextureView.SurfaceTextur
 
     public void setDrawActivity(CameraActivity cameraActivity) {
         this.cameraActivity = cameraActivity;
-    }
-
-    public void setRegisterHandler(RegisterHandler registerHandler) {
-//        mRegisterHandler = registerHandler;
     }
 
     public void setEnrolled(String userinfo, boolean enroll) {
@@ -188,12 +182,12 @@ public class CameraView extends TextureView implements TextureView.SurfaceTextur
 //            Log.i(TAG, "onPreviewFrame: from front IR camera");
 //            CameraDataQueueController.getInstance().putF(data, SystemClock.uptimeMillis());
             CameraDataQueueController.getInstance().putB(data, SystemClock.uptimeMillis());
-            Log.d(TAG, "B: "+cameraMode+"  "+SystemClock.uptimeMillis());
+//            Log.d(TAG, "B: "+cameraMode+"  "+SystemClock.uptimeMillis());
         } else {
 //            Log.i(TAG, "onPreviewFrame: from back color camera");
 //            CameraDataQueueController.getInstance().putB(data, SystemClock.uptimeMillis());
             CameraDataQueueController.getInstance().putF(data, SystemClock.uptimeMillis());
-            Log.d(TAG, "C: "+cameraMode+"  "+SystemClock.uptimeMillis());
+//            Log.d(TAG, "C: "+cameraMode+"  "+SystemClock.uptimeMillis());
         }
 
         if (!cameraMode){
@@ -243,7 +237,7 @@ public class CameraView extends TextureView implements TextureView.SurfaceTextur
         protected void onPreExecute() {
             super.onPreExecute();
             isStartfalg = true;
-            Log.d(TAG, "Execution onPreExecute: finished" );
+//            Log.d(TAG, "Execution onPreExecute: finished" );
         }
 
         @Override
@@ -258,17 +252,11 @@ public class CameraView extends TextureView implements TextureView.SurfaceTextur
                 int flag = EIFace.startExecution(frameInfos[0].clrFrame, frameInfos[0].irFrame, CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT,frameInfos[0].msg);
                 cameraActivity.drawOutput(EIFace.getFaceCoordinates(), CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT, enroll);
                 if(enroll){
-//                Message message=new Message();
-//                message.what=flag;
-//                message.obj=frameInfos[0].clrFrame;
                     //Main ui
                     cameraActivity.updateUI(flag,frameInfos[0].clrFrame);
-
-//                if (mRegisterHandler!=null)
-//                    mRegisterHandler.sendMessage(message);
                     Log.d(TAG, "Enroll : flag" +flag);
                 }
-                Log.d(TAG, "Execution doInBackground: finished" );
+//                Log.d(TAG, "Execution doInBackground: finished" );
             }
 
             return null;
@@ -278,7 +266,7 @@ public class CameraView extends TextureView implements TextureView.SurfaceTextur
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             isStartfalg = false;
-            Log.d(TAG, "Execution onPostExecute: finished" );
+//            Log.d(TAG, "Execution onPostExecute: finished" );
         }
 
     }

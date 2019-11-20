@@ -75,7 +75,7 @@ public class CameraDetectView extends View {
         //画框
 //        canvas.drawRect(new Rect(0, 0, canvas.getWidth(), canvas.getHeight()), paint);
 
-        paint.setStrokeWidth(8);
+        paint.setStrokeWidth(4);
         paint.setStyle(Paint.Style.FILL);
         if (isDebugMode) {
             canvas.drawText("Resolution : " + cameraHeight + " x " + cameraWidth, 150, 50, paint);
@@ -84,7 +84,7 @@ public class CameraDetectView extends View {
             canvas.drawText(BEYOND_START_EXECUTION_TIME_LOG, 150, 100, paint);
         }
 
-        drawTime(canvas, paint);
+//        drawTime(canvas, paint);
 
         paint.setTextSize(25);
         //canvas.drawColor(0x4D000000);
@@ -165,7 +165,8 @@ public class CameraDetectView extends View {
                     paint.setStyle(Paint.Style.FILL);
                     paint.setTextSize(30);
                     //math.round 四舍五入
-                    canvas.drawText("Confidence: " + Math.round(confidenceValList.get(iValue) * 10.0) / 10.0 + "%", (leftV + rightV) / 2, (bottomV + 75), paint);
+//                    canvas.drawText("Confidence: " + Math.round(confidenceValList.get(iValue) * 10.0) / 10.0 + "%", (leftV + rightV) / 2, (bottomV + 75), paint);
+
                     paint.setStyle(Paint.Style.STROKE);
                     //绘画效果矩形框
 //                    drawStyle1Rectangle(leftV, rightV, topV, bottomV, paint, canvas);

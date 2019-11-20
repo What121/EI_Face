@@ -356,10 +356,10 @@ public class wffrapp {
 
 		    int init = wffrjni.initialize(assetPath, 0, 0, 0, 1, 0);
 		    if (init != 0) {
-		        System.out.println("WFFRJNI: Init Error: " + init);
-		        semaphore.release();
-			return 3;
-		    }
+				System.out.println("WFFRJNI: Init Error: " + init);
+				semaphore.release();
+				return 3;
+			}
 		    String lastName = "";
 		    System.out.println("WFFRJNI: Enroll Init");
 		    if (name != null && name.contains(" ")) {
@@ -395,10 +395,7 @@ public class wffrapp {
     }
 
 
-
-
     public static int runRecognizeFromJpegFile(String imageFileName) {
-
  	try {
             	semaphore.acquire();
 	       	 if (currentState > 0 && frInitialized == 1) {
@@ -441,6 +438,8 @@ public class wffrapp {
 
 	
     }
+
+
 
     public static int updateFromPCDB()
     {

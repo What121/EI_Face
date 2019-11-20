@@ -8,6 +8,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
@@ -20,17 +21,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets {
-        main.jniLibs.srcDirs = ['libs']
-        main { jni.srcDirs = ['src/main/jni', 'src/main/jni/'] }
-    }
-
-    repositories {
-        flatDir {
-            dirs 'libs'
-        }
-    }
-
 }
 
 dependencies {
@@ -40,7 +30,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
+    implementation 'com.android.support:multidex:1.0.3'
     implementation project(path: ':ei_library')
 
     //recyclerview,cardview,glide,circle imageview
@@ -53,7 +43,7 @@ dependencies {
     implementation 'com.jakewharton:butterknife:9.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0'
 
-    //net frmework
+    //net framwork
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'com.google.code.gson:gson:2.8.5'
 }

@@ -1,5 +1,6 @@
 package com.bestom.eiface.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +9,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -21,15 +23,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bestom.ei_library.EIFace;
 import com.bestom.ei_library.commons.utils.DataTurn;
+import com.bestom.ei_library.commons.utils.FileUtil;
+import com.bestom.ei_library.commons.utils.HttpUtil;
+import com.bestom.eiface.MyApp;
 import com.bestom.eiface.R;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.NoSuchAlgorithmException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -46,35 +49,37 @@ public class RegisterIMGActivity extends AppCompatActivity implements View.OnCli
     Button select_bt,selectNET_bt,sub;
     TextView log_tv;
 
-    int i=0;
-
-    private String hexbody;
-    private byte[] image;
-    private Faceapi mFaceapi;
     private com.bestom.ei_library.commons.utils.DataTurn DataTurn=new DataTurn();
-
     private Bitmap bitmap;
     private String picturePath="";
-    private InputStream Imginputstream;
-
-    private boolean flag_hexbody=false;
-
     public static final int CHOOSE_PHOTO = 2;
+    private final int USER_VIEW_SHOW = 1;
+
+    private final String imgPath=MyApp.Cachepath+"register"+ File.separator;
+
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler=new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == USER_VIEW_SHOW) {
+                showImgAndUserinfo();
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_img);
+        mContext=this;
+        mActivity=this;
 
-        init();
         initview();
     }
 
     private void init(){
-        mContext=this;
-        mActivity=this;
 
-        mFaceapi=new Faceapi();
+
     }
 
     private void initview(){
@@ -107,57 +112,14 @@ public class RegisterIMGActivity extends AppCompatActivity implements View.OnCli
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         InputStream inputStream = response.body().byteStream();//得到图片的流
-                        int len = 0;
                         bitmap = BitmapFactory.decodeStream(inputStream);
 
                         //region 保存网络图片到本地
-                         picturePath= FileUtil.SavaImage(bitmap, Environment.getExternalStorageDirectory().getPath()+"/Pictures/testUface");
+                         picturePath= FileUtil.SavaImage(bitmap,imgPath );
                         //endregion
                         inputStream.close();
-                        flag_hexbody=false;
-                        //region  第二步预热操作
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    if (!picturePath.equals(""))
-                                        Imginputstream = new FileInputStream(picturePath);
-                                    image = DataTurn.inputtoByteArray(Imginputstream);
-                                    hexbody=mFaceapi.yuresecond(image);
-                                    flag_hexbody=true;
-                                }catch (FileNotFoundException e) {
-                                    e.printStackTrace();
-                                } finally {
-                                    if (Imginputstream!=null){
-                                        try {
-                                            Imginputstream.close();
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                }
-                            }
-                        }).start();
-                        //endregion
 
-                        //region UI界面更新
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (bitmap!=null)
-                                    mImageView.setImageBitmap(bitmap);//ImageView显示图片
-
-                                sub.setVisibility(View.VISIBLE);
-                                sub.setFocusable(true);
-
-                                userinfo.setVisibility(View.VISIBLE);
-                                mNameEdit.setText("");
-                                mNumberEdit.setText("");
-
-                                log_tv.setText("imagePath:"+picturePath);
-                            }
-                        });
-                        //endregion
+                        mHandler.sendEmptyMessage(USER_VIEW_SHOW);
                     }
 
                     @Override
@@ -170,24 +132,24 @@ public class RegisterIMGActivity extends AppCompatActivity implements View.OnCli
             case R.id.sub:
                 //region get registerinfo
                 String name = mNameEdit.getText().toString().trim();
-                String jobNum = mNumberEdit.getText().toString().trim();
+                String ID = mNumberEdit.getText().toString().trim();
                 if (TextUtils.isEmpty(name)) {
                     Toast.makeText(mContext,"请填写姓名！",Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if (TextUtils.isEmpty(jobNum)) {
-                    Toast.makeText(mContext,"请填写工号！",Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(ID)) {
+                    Toast.makeText(mContext,"请填写身份证号！",Toast.LENGTH_SHORT).show();
                     break;
                 }
 
-                String nameAndJobHex = DataTurn.StrToHex(name + "," + jobNum+",");
+                String registInfo = name + "," + ID;
                 userinfo.setVisibility(View.GONE);
                 //endregion
                 select_bt.setVisibility(View.GONE);
                 selectNET_bt.setVisibility(View.GONE);
                 sub.setVisibility(View.GONE);
-                log_tv.setText("registerinfo:"+nameAndJobHex);
-                register(nameAndJobHex);
+                log_tv.setText("registerinfo:"+registInfo+"\n");
+                register(registInfo);
                 break;
             default:
                 break;
@@ -219,173 +181,51 @@ public class RegisterIMGActivity extends AppCompatActivity implements View.OnCli
         cursor.moveToFirst();
         int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
         picturePath = cursor.getString(columnIndex);
+        cursor.close();
         //图片路径picturePath
         bitmap = FileUtil.getBitmapForImgPath (picturePath);//从路径加载出图片bitmap  //20190614修改通过uri set 图片
+        picturePath = FileUtil.SavaImage(bitmap,imgPath);   //保存注册图片
 
 //        bitmap = rotateBimap(this, -90, bitmap);//旋转图片-90°
-        cursor.close();
 
-        flag_hexbody=false;
-        //region  第二步预热操作
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    if (!picturePath.equals(""))
-                        Imginputstream = new FileInputStream(picturePath);
-                    image = DataTurn.inputtoByteArray(Imginputstream);
-                    hexbody=mFaceapi.yuresecond(image);
-                    flag_hexbody=true;
-                }catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } finally {
-                    if (Imginputstream!=null){
-                        try {
-                            Imginputstream.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-        }).start();
-        //endregion
-
-        //region UI界面更新
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                //update 修改通过 uri Set image
-                if (bitmap!=null)
-                    mImageView.setImageBitmap(bitmap);//ImageView显示图片
-
-                sub.setVisibility(View.VISIBLE);
-                sub.setFocusable(true);
-
-                userinfo.setVisibility(View.VISIBLE);
-                mNameEdit.setText("");
-                mNumberEdit.setText("");
-
-                log_tv.setText("imagePath:"+picturePath);
-            }
-        });
-        //endregion
-
+        mHandler.sendEmptyMessage(USER_VIEW_SHOW);
     }
 
-    //region 图片上传注册
-    private void register(String nameAndJobHex){
-        //四步提交环环相扣
-        final  String nameAndJob=nameAndJobHex;
-        String path="picture.jpeg";
-        //String path=picturePath;
-        byte[] bytes=DataTurn.HexToIByteArr(DataTurn.StrToHex(path),64);
-        //第一步
-        mFaceapi.fileOpen(bytes, new RespListener() {
-            @Override
-            public void onSuccess(int code, String msg) {
-                Log.i(TAG, "111111");
+    private void showImgAndUserinfo(){
+        if (bitmap!=null)
+            mImageView.setImageBitmap(bitmap);//ImageView显示图片
 
-                //第二步
-                i = 0;
-                final int j = (image.length % (150 * 1024 + 4) != 0) ? image.length / (150 * 1024 + 4) + 1 : image.length / (150 * 1024 + 4);//分包发送次数
-                //待指令完成拼接 提交第二步
-                while (flag_hexbody){
-                    mFaceapi.fileData(hexbody, new RespListener() {
-                        @Override
-                        public void onSuccess(int code, String msg) {
-                            Log.i(TAG, "222222");
-                            i++;
-                            //第二步上传照片做了分包处理，所以会有多次返回，这里取 最后一次数据返回为标志完成，进行第三步提交
-                            if (i != j)
-                                return;
+        sub.setVisibility(View.VISIBLE);
+        sub.setFocusable(true);
 
-                            //第三步
-                            try {
-                                InputStream in = new FileInputStream(new File(picturePath));
-                                byte[] md5 = new byte[0];
-                                md5 = MD5.getMD5(in);
-                                Log.i("md5", md5.length + "--" + md5.toString());
-                                mFaceapi.fileDone(md5, new RespListener() {
-                                    @Override
-                                    public void onSuccess(int code, String msg) {
-                                        Log.i(TAG, "3333333");
+        userinfo.setVisibility(View.VISIBLE);
+        mNameEdit.setText("");
+        mNumberEdit.setText("");
 
-                                        //第四步
-                                        mFaceapi.facePicture(nameAndJob, new RespSampleListener<FaceResult>() {
-                                            @Override
-                                            public void onSuccess(int code, FaceResult faceResult) {
-                                                Log.i(TAG, "4444444");
-                                                Toast.makeText(mContext, "成功", Toast.LENGTH_SHORT).show();
-                                                log_tv.setText("第四步成功" + code + faceResult.toString());
-                                                select_bt.setVisibility(View.VISIBLE);
-                                                selectNET_bt.setVisibility(View.VISIBLE);
-                                                //置空
-                                                bitmap = null;
-                                                picturePath = "";
-                                            }
+        log_tv.setText("imagePath:"+picturePath);
+    }
 
-                                            @Override
-                                            public void onFailure(int code, String msg) {
-                                                Toast.makeText(mContext, "注册失败" + code + msg, Toast.LENGTH_SHORT).show();
-                                                log_tv.setText("第四步失败" + code + msg);
-                                                //置空
-                                                bitmap = null;
-                                                picturePath = "";
-                                                select_bt.setVisibility(View.VISIBLE);
-                                                selectNET_bt.setVisibility(View.VISIBLE);
-                                            }
-                                        });
-                                    }
-
-                                    @Override
-                                    public void onFailure(int code, String msg) {
-                                        Log.i(TAG, code + msg);
-                                        log_tv.setText("第三步失败" + code + msg);
-                                        select_bt.setVisibility(View.VISIBLE);
-                                        selectNET_bt.setVisibility(View.VISIBLE);
-                                        picturePath = "";
-                                    }
-                                });
-                            } catch (NoSuchAlgorithmException e) {
-                                e.printStackTrace();
-                                log_tv.setText("第三步失败" + e.getMessage());
-                                select_bt.setVisibility(View.VISIBLE);
-                                selectNET_bt.setVisibility(View.VISIBLE);
-                                picturePath = "";
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                                log_tv.setText("第三步失败" + e.getMessage());
-                                select_bt.setVisibility(View.VISIBLE);
-                                selectNET_bt.setVisibility(View.VISIBLE);
-                                picturePath = "";
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(int code, String msg) {
-                            Log.i(TAG, code + msg);
-                            log_tv.setText("第二步失败" + code + msg);
-                            picturePath = "";
-                            select_bt.setVisibility(View.VISIBLE);
-                            selectNET_bt.setVisibility(View.VISIBLE);
-                        }
-                    });
-                    break;
-                }
-            }
-
-            @Override
-            public void onFailure(int code, String msg) {
-                Log.i(TAG,code+msg);
-                log_tv.setText("第一步失败"+code+msg);
-                picturePath="";
-                select_bt.setVisibility(View.VISIBLE);
-                selectNET_bt.setVisibility(View.VISIBLE);
-
-            }
-        });
+    //region 图片注册
+    private void register(String registerInfo){
+        int recordID = EIFace.EnrollFromJpegFile(picturePath,registerInfo);
+        //更新注册结果
+        updateImgResult(recordID);
     }
     //endregions
 
+
+    private void updateImgResult(int recordID){
+        Log.d(TAG, "updateImgResult recordID: "+recordID);
+        if (recordID>=0){
+            log_tv.append("success:"+recordID);
+        }else {
+            log_tv.append("fail:"+recordID);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        EIFace.initwff();
+        super.onBackPressed();
+    }
 }

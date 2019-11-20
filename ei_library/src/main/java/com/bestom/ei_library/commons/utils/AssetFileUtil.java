@@ -18,7 +18,9 @@ public class AssetFileUtil {
     private String cachepath=null;
     private Context context;
 
-    public AssetFileUtil(Context context) {
+    private static AssetFileUtil instance;
+
+    private AssetFileUtil(Context context) {
         this.context = context;
         if (filepath==null){
             filepath=context.getFilesDir().getPath();
@@ -38,6 +40,25 @@ public class AssetFileUtil {
         cachepath=cachepath+File.separator;
 
         Log.d(TAG, "AssetFileUtil: init paths\n"+"datapath:"+datapath+"\n filepath:"+filepath+"\n cachepath"+cachepath);
+    }
+
+    public static AssetFileUtil getInstance(Context context) {
+        if (instance==null){
+            instance=new AssetFileUtil(context);
+        }
+        return instance;
+    }
+
+    public String getDatapath() {
+        return datapath;
+    }
+
+    public String getFilepath() {
+        return filepath;
+    }
+
+    public String getCachepath() {
+        return cachepath;
     }
 
     public boolean checkFilesExist(String filepath){
@@ -66,8 +87,10 @@ public class AssetFileUtil {
         for (String filename:filenames){
             if (filename.equals("db.dat") || filename.equals("db.dat.dat")) {
                 filepath = getDualFilePath() + "/wffrdb"+filename;
-            }else if (filename.indexOf(".bin")!=-1){
+            } else if (filename.indexOf(".bin")!=-1){
                 filepath = getDualFilePath() + File.separator+filename;
+            } else if (filename.indexOf("pid")!=-1){
+                filepath = getDualFilePath() + "/wffrdb"+File.separator + filename;
             } else {
                 filepath = path + filename;
             }

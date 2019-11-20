@@ -3,6 +3,7 @@ package com.bestom.ei_library.core.api;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.bestom.ei_library.commons.constant.DBConstant;
 import com.bestom.ei_library.core.manager.DB.DataBaseOpenHelper;
@@ -60,6 +61,17 @@ public class DBApi {
     public static Cursor queryPersonInfoByID(String ID){
         String sql="where id="+ID;
         return mDataBaseOpenHelper.query(DBConstant.TABLE_NAME,sql);
+    }
+
+    public static String queryPersonNameByID(String ID){
+        String sql="where id="+ID;
+        Cursor cursor = mDataBaseOpenHelper.query(DBConstant.TABLE_NAME,sql);
+        String name = "";
+        for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            name=cursor.getString(2);
+            Log.d(TAG, "cursor  recordid"+cursor.getInt(0) +"  ID:"+cursor.getString(1)+"   name:"+cursor.getString(2));
+        }
+        return name;
     }
 
     public static void deletePersonInfoByRecordID(int recordid){

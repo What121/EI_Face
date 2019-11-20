@@ -11,7 +11,10 @@ import com.bestom.ei_library.EIFace;
 import com.bestom.ei_library.commons.constant.SerialCmdCode;
 import com.bestom.ei_library.commons.constant.StatusCode;
 import com.bestom.ei_library.core.api.SerialApi;
+import com.bestom.ei_library.core.api.SysApi;
 import com.bestom.ei_library.core.service.Interface.Listener.RespSampleListener;
+
+import java.util.Random;
 
 public class MyApp extends Application {
     private static final String TAG = "MyApp";
@@ -19,6 +22,10 @@ public class MyApp extends Application {
 
     public static boolean MirrorX = false ;
     public static String DualFilePath;
+    public static String Datapath;
+    public static String Cachepath;
+    public static String Filepath;
+
     public static String[] permissions;
     public static  final int CAMERA_WIDTH =640;
     public static  final int CAMERA_HEIGHT =480;
@@ -27,9 +34,7 @@ public class MyApp extends Application {
     public static PowerManager pm;
     public static PowerManager.WakeLock mWakeLock;
     public static SerialApi mSerialApi;
-
-//    private String[] binfiles = {"b1.bin", "f160tm.bin","p0.bin", "p1tc.bin", "p2tc.bin", "p3tc.bin", "p4tc.bin", "q31tm.bin","q103tm.bin", "s11tm.bin"};
-//    private String[] configfiles = {"ei_config"};
+    public static SysApi mSysApi;
 
     @Override
     public void onCreate() {
@@ -38,17 +43,25 @@ public class MyApp extends Application {
         //初始化
         init();
 
-        //check change Screen state
-        checkScreanLight();
+        //check change Screen state by randa
+//        checkScreanLight();
+
+        checkScreenThread.start();
     }
 
     @SuppressLint("InvalidWakeLockTag")
     private void init(){
         mContext=this;
         mSerialApi=new SerialApi();
+        mSysApi=new SysApi(mContext);
 
         //初始化算法、串口
         DualFilePath = EIFace.Initialize(mContext);
+        Datapath = EIFace.getDatapath();
+        Filepath = EIFace.getFilepath();
+        Cachepath = EIFace.getCachepath();
+
+        mSysApi.writeLed("1");
 
 //        copyAssets();
 //        initwff();
@@ -63,44 +76,6 @@ public class MyApp extends Application {
 
         Log.d(TAG, "init: finished");
     }
-
-    //region copyAssets() initwff()
-    /*
-    private void copyAssets(){
-        //.bin（二进制）文件
-        if(!new AssetFileUtil(mContext).checkFilesExist(binfiles,1)){
-            (new AssetFileUtil(mContext)).copyFilesFromAssets(binfiles,1);//copies files from assests to data file
-        }
-        //配置文件
-        if(!new AssetFileUtil(mContext).checkFilesExist(configfiles,0)){
-            (new AssetFileUtil(mContext)).copyFilesFromAssets(configfiles,0);//copies files from assests to data file
-        }
-    }
-    */
-
-    /*
-    private void initwff(){
-        wffrdualcamapp.setState(1);
-        wffrdualcamapp.finish_state = 1;
-
-        DualFilePath = new AssetFileUtil(mContext).getDualFilePath();
-        Log.d(TAG, "DualFilePath: "+DualFilePath);
-        wffrdualcamapp.setAssetPath(DualFilePath);
-
-        //设置识别门槛
-        wffrjni.SetRecognitionThreshold( SPUtil.getValue(mContext,"threshold", (int) wffrjni.GetRecognitionThreshold()) );
-        //最小人脸占屏幕百分比
-        wffrjni.SetMinFaceDetectionSizePercent(5);
-        //wffrjni.SetVerbose("",1);
-        //wffrjni.setAndroidVerbose(0);
-//        wffrjni.EnableImageSaveForDebugging(1);
-        //wffrjni.SetSpoofingSensitivity(3);
-        //wffrjni.SetDualcamBGReject(0);
-        //wffrjni.SetSingleCamSpoofThreshold(-2);
-        //wffrjni.SetAntiSpoofBlockingFlag(0);
-    }
-    */
-    //endregion
 
     private void checkScreanLight(){
         mSerialApi.setStatus(SerialCmdCode.SERIAL_CMD_STATUS, true, new RespSampleListener<String>() {
@@ -120,7 +95,6 @@ public class MyApp extends Application {
                 Log.e(TAG, "setStatus onFailure code: "+code+",errmsg is "+errMsg);
             }
         });
-
     }
 
     //region checkScreenThread
@@ -130,6 +104,50 @@ public class MyApp extends Application {
             while (true){
                 try {
                     Thread.sleep(3000);
+
+                    //region test use random int control screen and led
+                    int i = (int)(1+Math.random()*(10-1+1));
+                    Log.d(TAG, "run: random int is "+i);
+                    if (i%2==0){
+                        mtimehandler.postDelayed(new Runnable() {
+                            public void run() {
+                                Log.d(TAG, "mtimehandler: wakelock release ");
+                                if (mWakeLock!=null){
+
+                                    mWakeLock.release();
+                                    mWakeLock=null;
+
+                                    //region goio led status change
+                                    mSysApi.writeLed("0");
+                                    //endregion
+
+                                }
+                            }
+                        }, 100);
+                    }
+                    else {
+                        mtimehandler.postDelayed(new Runnable() {
+                            @SuppressLint("InvalidWakeLockTag")
+                            public void run() {
+                                Log.d(TAG, "mtimehandler: wakelock acquire ");
+                                if (mWakeLock == null) {
+                                    mWakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG");
+                                }
+
+                                mWakeLock.setReferenceCounted(false);
+                                mWakeLock.acquire();
+
+                                //region gpio led status changed
+                                mSysApi.writeLed("1");
+                                //endregion
+
+                            }
+                        }, 100);
+                    }
+                    //endregion
+
+                    //region 获取雷达数据
+                    /*
                     mSerialApi.getRadarInfo(SerialCmdCode.SERIAL_CMD_INFO, new RespSampleListener<Integer>() {
                         @Override
                         public void onSuccess(int code, Integer integer) {
@@ -197,6 +215,9 @@ public class MyApp extends Application {
                             Log.e(TAG,"执行失败,代码："+code+errMsg);
                         }
                     });
+                    */
+                    //endregion
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
