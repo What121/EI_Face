@@ -215,33 +215,16 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.sysinfo_tv:
                 EIFace.stopExecution();
                 //初始化状态
-//                wffrdualcamapp.setState(0);
                 EIFace.setState(0);
                 Intent DBintent = new Intent(this, RegisterDBActivity.class);
                 startActivity(DBintent);
                 break;
             case R.id.setting_tv:
-
-//                MyApp.mSerialApi.setStatus(SerialCmdCode.SERIAL_CMD_STATUS, true, new RespSampleListener<String>() {
-//                    @Override
-//                    public void onSuccess(int code, String s) {
-//                        if (code== StatusCode.SUCCESS.getCode()){
-//                            Log.d(TAG, "setStatus onSuccess code: "+code+" ,values is "+s);
-//                            //打开radar成功,获取数据
-////                            checkScreenThread.start();
-//                        }else {
-//                            Log.d(TAG, "setStatus onSuccess code: "+code+" ,msg is "+s);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(int code, String errMsg) {
-//                        Log.e(TAG, "setStatus onFailure code: "+code+",errmsg is "+errMsg);
-//                    }
-//                });
-
-                Toast.makeText(mContext,"setting待开通...",Toast.LENGTH_SHORT).show();
-
+                EIFace.stopExecution();
+                //初始化状态
+                EIFace.setState(0);
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
                 break;
             case R.id.upregister_tv:
                 EIFace.stopExecution();

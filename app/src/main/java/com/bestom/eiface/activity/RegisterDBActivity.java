@@ -168,15 +168,14 @@ public class RegisterDBActivity extends AppCompatActivity {
 //        Log.i(TAG,"INIT : "+ wffrdualcamapp.getDatabase());
 //        String[] userinfos = (String[]) wffrdualcamapp.getDatabaseNames();
 //        int[] recordIDs = wffrdualcamapp.getDatabaseRecords();
-        Log.i(TAG,"INIT : "+ EIFace.getDatabase());
-        String[] userinfos = EIFace.getDatabaseNames();
-        int[] recordIDs = EIFace.getDatabaseRecords();
+        Log.i(TAG,"INIT : "+ EIFace.getEIDatabase());
+        String[] IDs = EIFace.getEIDatabaseIDs();
+        int[] recordIDs = EIFace.getEIDatabaseRecords();
 
-        if (userinfos!=null){
-            for (int i = 0; i < userinfos.length; i++) {
-                String userinfo = userinfos[i];
-                String ID = userinfo.substring(userinfo.indexOf(' ')+1);
-                String name = userinfo.substring(0,userinfo.indexOf(' '));
+        if (IDs!=null){
+            for (int i = 0; i < IDs.length; i++) {
+                String ID = IDs[i];
+                String name = EIFace.getDBNamebyID(ID);
                 mUserInfoDBBeanList.add(new UserInfoDBBean(getPath(assetPath +
                         "wffrdb/pid" + recordIDs[i]),name,ID , recordIDs[i]));
             }
@@ -247,7 +246,7 @@ public class RegisterDBActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        Cursor cursor = EIFace.getALL();
+        Cursor cursor = EIFace.getDBALL();
         Log.d(TAG, "cursor count: "+cursor.getCount());
         for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
             Log.d(TAG, "cursor  recordid"+cursor.getInt(0) +"  ID:"+cursor.getString(1)+"   name:"+cursor.getString(2));

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.bestom.eiface">
+    package="com.bestom.eiface"
+    android:sharedUserId="android.uid.system">
 
     <uses-feature android:name="android.hardware.camera2.full" />
 
@@ -44,7 +45,7 @@
         <!-- android:windowSoftInputMode="adjustResize|stateHidden"/> -->
         <activity android:name=".activity.RegisterIMGActivity" />
         <activity android:name=".activity.RegisterDBActivity" />
-        <activity android:name=".activity.SettingsActivity"></activity>
+        <activity android:name=".activity.SettingsActivity"/>
         <meta-data
             android:name="android.support.VERSION"
             android:value="28.0.0"

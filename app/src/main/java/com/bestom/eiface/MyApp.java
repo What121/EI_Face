@@ -10,9 +10,11 @@ import android.util.Log;
 import com.bestom.ei_library.EIFace;
 import com.bestom.ei_library.commons.constant.SerialCmdCode;
 import com.bestom.ei_library.commons.constant.StatusCode;
+import com.bestom.ei_library.commons.utils.SPUtil;
 import com.bestom.ei_library.core.api.SerialApi;
 import com.bestom.ei_library.core.api.SysApi;
 import com.bestom.ei_library.core.service.Interface.Listener.RespSampleListener;
+import com.bestom.eiface.common.Settings;
 
 import java.util.Random;
 
@@ -36,6 +38,9 @@ public class MyApp extends Application {
     public static SerialApi mSerialApi;
     public static SysApi mSysApi;
 
+    public static boolean face_state;
+    public static int face_times;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -54,6 +59,8 @@ public class MyApp extends Application {
         mContext=this;
         mSerialApi=new SerialApi();
         mSysApi=new SysApi(mContext);
+        face_state= SPUtil.getValue(mContext, Settings.FACE_STATE,true);
+        face_times= SPUtil.getValue(mContext,Settings.FACE_TIMES,1);
 
         //初始化算法、串口
         DualFilePath = EIFace.Initialize(mContext);

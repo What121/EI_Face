@@ -36,8 +36,6 @@ public class EIFace {
         cachepath=AssetFileUtil.getInstance(mContext).getCachepath();
         DualFilePath=AssetFileUtil.getInstance(mContext).getDualFilePath();
 
-
-
         //检测资源文件
         copyAssets();
         //初始化算法接口的一些参数
@@ -165,7 +163,6 @@ public class EIFace {
         }
     }
 
-
     public static void setFinishState(int val){
         wffrdualcamapp.setFinishState(val);
     }
@@ -218,7 +215,7 @@ public class EIFace {
      * @param value
      * @return
      */
-    public static int SetRecognitionThreshold(int value){
+    public static int SetRecognitionThreshold(float value){
         SPUtil.putValue(mContext,"threshold", value);
         return wffrjni.SetRecognitionThreshold(value);
     }
@@ -227,16 +224,12 @@ public class EIFace {
      * 获取 识别门槛
      * @return
      */
-    public static int GetRecognitionThreshold(){
-        return SPUtil.getValue(mContext,"threshold", (int) wffrjni.GetRecognitionThreshold());
+    public static float GetRecognitionThreshold(){
+        return SPUtil.getValue(mContext,"threshold", wffrjni.GetRecognitionThreshold());
     }
 
     public static float[] getConfidence(){
         return wffrdualcamapp.getConfidence();
-    }
-
-    public static Cursor getALL(){
-        return DBApi.queryAll();
     }
 
     public static String getNames(){
@@ -258,21 +251,31 @@ public class EIFace {
         return wffrdualcamapp.getTimeLeft();
     }
 
+
+    public static Cursor getDBALL(){
+        return DBApi.queryAll();
+    }
+
+    public static String getDBNamebyID(String ID){
+        return DBApi.queryPersonNameByID(ID);
+    }
+
+    public static int getEIDatabase(){
+        return wffrdualcamapp.getDatabase();
+    }
+
+    public static String[] getEIDatabaseIDs(){
+        return (String[]) wffrdualcamapp.getDatabaseNames();
+    }
+
+    public static int[] getEIDatabaseRecords(){
+        return wffrdualcamapp.getDatabaseRecords();
+    }
+
     public static int deletePerson(int recordID){
         return wffrdualcamapp.deletePerson(recordID);
     }
 
-    public static int getDatabase(){
-        return wffrdualcamapp.getDatabase();
-    }
-
-    public static String[] getDatabaseNames(){
-        return (String[]) wffrdualcamapp.getDatabaseNames();
-    }
-
-    public static int[] getDatabaseRecords(){
-        return wffrdualcamapp.getDatabaseRecords();
-    }
 
     //endregion
 
@@ -319,7 +322,6 @@ public class EIFace {
         if(!AssetFileUtil.getInstance(mContext).checkFilesExist(configfiles,0)){
             (AssetFileUtil.getInstance(mContext)).copyFilesFromAssets(configfiles,0);//copies files from assests to data file
         }
-
     }
 
     public static void initwff(){
@@ -331,9 +333,9 @@ public class EIFace {
         setAssetPath(DualFilePath);
 
         //设置识别门槛
-        SetRecognitionThreshold(SPUtil.getValue(mContext,"threshold",(int) GetRecognitionThreshold()));
+        SetRecognitionThreshold(SPUtil.getValue(mContext,"threshold", GetRecognitionThreshold()));
         //最小人脸占屏幕百分比
-        SetMinFaceDetectionSizePercent(SPUtil.getValue(mContext,"facemodel",10));
+        SetMinFaceDetectionSizePercent(40);
         //wffrjni.SetVerbose("",1);
         //wffrjni.setAndroidVerbose(0);
 //        wffrjni.EnableImageSaveForDebugging(1);

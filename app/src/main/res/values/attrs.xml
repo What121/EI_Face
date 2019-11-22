@@ -7,7 +7,6 @@
     </declare-styleable>
 
     <string-array name="face_key">
-        <item>0</item>
         <item>0.1</item>
         <item>0.2</item>
         <item>0.3</item>
@@ -37,11 +36,6 @@
         <item>2</item>
         <item>3</item>
         <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
     </string-array>
 
 
