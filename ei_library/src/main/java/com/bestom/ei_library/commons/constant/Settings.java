@@ -1,6 +1,7 @@
-package com.bestom.eiface.common;
+package com.bestom.ei_library.commons.constant;
 
 public class Settings {
+    public static final String FACE_IR = "face_ir";
     public static final String FACE_STATE = "face_state";
     public static final String FACE_TIMES = "pass_times";
     public static final String FACE_KEY = "threshold";

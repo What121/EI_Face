@@ -15,7 +15,7 @@ import com.bestom.ei_library.EIFace;
 import com.bestom.ei_library.commons.utils.SPUtil;
 import com.bestom.eiface.MyApp;
 import com.bestom.eiface.R;
-import com.bestom.eiface.common.Settings;
+import com.bestom.ei_library.commons.constant.Settings;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +29,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     @BindView(R.id.back) ImageView back_imgview;
     @BindView(R.id.shi_sw) Switch shi_sw;
+    @BindView(R.id.ircamera_sw) Switch ir_sw;
     @BindView(R.id.relay_sw) Switch relay_sw;
     @BindView(R.id.led_sw) Switch led_sw;
     @BindView(R.id.pass_NO) Spinner passTimes_sp;
@@ -50,6 +51,11 @@ public class SettingsActivity extends AppCompatActivity {
     private void initview(){
         back_imgview.setOnClickListener(view -> finish());
 
+        //IR框状态
+        boolean irflag = SPUtil.getValue(mContext,Settings.FACE_IR,false);
+        ir_sw.setChecked(irflag);
+        ir_sw.setOnCheckedChangeListener((buttonView, isChecked)
+                -> SPUtil.putValue(mContext, Settings.FACE_IR,isChecked));
         //打开/关闭人脸实时检测
         shi_sw.setChecked(MyApp.face_state);
         shi_sw.setOnCheckedChangeListener((buttonView, isChecked)

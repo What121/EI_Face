@@ -29,20 +29,18 @@ import android.widget.Toast;
 
 import com.bestom.ei_library.EIFace;
 import com.bestom.ei_library.commons.constant.EICode;
-import com.bestom.ei_library.commons.constant.SerialCmdCode;
-import com.bestom.ei_library.commons.constant.StatusCode;
 import com.bestom.ei_library.commons.utils.PermissionsUtils;
-import com.bestom.ei_library.core.service.Interface.Listener.RespSampleListener;
+import com.bestom.ei_library.commons.utils.SPUtil;
 import com.bestom.eiface.Control.CameraController;
 import com.bestom.eiface.Control.CameraDataQueueController;
 import com.bestom.eiface.Control.CameraViewController;
 import com.bestom.eiface.MyApp;
 import com.bestom.eiface.R;
+import com.bestom.ei_library.commons.constant.Settings;
 import com.bestom.eiface.view.CameraDetectView;
 import com.bestom.eiface.view.CameraView;
 import com.wf.wffrdualcamapp;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -134,7 +132,6 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void  initview(){
-        frontLayout.setVisibility(View.GONE);
         backLayout.setVisibility(View.VISIBLE);
         systemView.setOnClickListener(this);
         upregisterView.setOnClickListener(this);
@@ -169,13 +166,24 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void initCameraView(){
+        if(SPUtil.getValue(mContext,Settings.FACE_IR,false)){
+            frontLayout.setVisibility(View.VISIBLE);
+        }else {
+            frontLayout.setVisibility(View.GONE);
+        }
+        frontCameraView=null;
         frontCameraView=findViewById(R.id.cameraView_front);
         frontDetecView=findViewById(R.id.cameraDetect_front);
         backCameraView=findViewById(R.id.cameraView_back);
         backDetecView=findViewById(R.id.cameraDetect_back);
 
         frontCameraView.setDrawActivity(this);
-        frontCameraView.IRCamerainit();
+        if(!SPUtil.getValue(mContext, Settings.FACE_IR,false)){
+            frontCameraView.IRCamerainit(true);
+        }else {
+            frontCameraView.IRCamerainit(false);
+        }
+
         backCameraView.setDrawActivity(this);
         CameraViewController.getInstant().putFCameraView(frontCameraView);
         CameraViewController.getInstant().putBCameraView(backCameraView);
@@ -439,7 +447,8 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                 frontDetecView.setTimeLeft(timeLeft);
                 //System.out.println("Time of YUV Image After and before rendereing rect");
                 backDetecView.setVisibility(View.VISIBLE);
-                frontDetecView.setVisibility(View.VISIBLE);
+                //IR camera 不显示实时信息
+//                frontDetecView.setVisibility(View.VISIBLE);
                 backDetecView.setRectValuesArray(clrleftCornerValues, clrtopCornerValues, clrrightCornerValues, clrbottomCornerValues);
                 frontDetecView.setRectValuesArray(irleftCornerValues, irtopCornerValues, irrightCornerValues, irbottomCornerValues);
                 backDetecView.setValuesArray(nameList, confidenceValList);

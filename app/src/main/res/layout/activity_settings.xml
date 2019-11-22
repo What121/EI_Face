@@ -81,6 +81,34 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:text="IR框状态"
+                    android:textColor="@color/colorLightBlue"
+                    android:textSize="20sp" />
+
+                <Switch
+                    android:id="@+id/ircamera_sw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorWhite" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:text="识别次数:"
                     android:textColor="@color/colorLightBlue"
                     android:textSize="20sp" />

@@ -14,9 +14,7 @@ import com.bestom.ei_library.commons.utils.SPUtil;
 import com.bestom.ei_library.core.api.SerialApi;
 import com.bestom.ei_library.core.api.SysApi;
 import com.bestom.ei_library.core.service.Interface.Listener.RespSampleListener;
-import com.bestom.eiface.common.Settings;
-
-import java.util.Random;
+import com.bestom.ei_library.commons.constant.Settings;
 
 public class MyApp extends Application {
     private static final String TAG = "MyApp";

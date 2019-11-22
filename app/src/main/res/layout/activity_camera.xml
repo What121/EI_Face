@@ -75,27 +75,6 @@
             android:src="@drawable/ic_rect_dw" />
 
         <RelativeLayout
-            android:id="@+id/layout_frontcamera"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone">
-
-            <com.bestom.eiface.view.CameraView
-                android:visibility="gone"
-                android:id="@+id/cameraView_front"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:msv_cameraFront="true" />
-
-            <com.bestom.eiface.view.CameraDetectView
-                android:visibility="gone"
-                android:id="@+id/cameraDetect_front"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
             android:id="@+id/layout_backcamera"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -108,8 +87,28 @@
                 app:msv_cameraMirrorX="false" />
 
             <com.bestom.eiface.view.CameraDetectView
-                android:visibility="gone"
                 android:id="@+id/cameraDetect_back"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_frontcamera"
+            android:paddingTop="15dp"
+            android:paddingLeft="15dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp">
+
+            <com.bestom.eiface.view.CameraView
+                android:id="@+id/cameraView_front"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:msv_cameraFront="true" />
+
+            <com.bestom.eiface.view.CameraDetectView
+                android:visibility="gone"
+                android:id="@+id/cameraDetect_front"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.TextureView;
 
 import com.bestom.ei_library.commons.constant.EICode;
+import com.bestom.ei_library.commons.constant.Settings;
 import com.bestom.ei_library.commons.utils.AssetFileUtil;
 import com.bestom.ei_library.commons.utils.FLogs;
 import com.bestom.ei_library.commons.utils.SPUtil;
@@ -46,6 +47,8 @@ public class EIFace {
 
         //log control
         setLog(true,0);
+
+        SPUtil.putValue(mContext, Settings.FACE_IR,false);
 
         return DualFilePath;
     }

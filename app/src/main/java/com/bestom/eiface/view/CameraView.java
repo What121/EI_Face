@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.EventListener;
 import java.util.Random;
 
 import static com.bestom.eiface.MyApp.MirrorX;
@@ -39,6 +40,7 @@ public class CameraView extends TextureView implements TextureView.SurfaceTextur
 //    private RegisterHandler mRegisterHandler;
     private CameraActivity cameraActivity;
     //初始化camera关键参数
+    private SurfaceTexture mSurfaceTexture;
     public byte[] cameraPreviewBuffer;
     private boolean cameraMode = true;
     private boolean cameraMirrorX = false;
@@ -77,20 +79,22 @@ public class CameraView extends TextureView implements TextureView.SurfaceTextur
             a.recycle();
         }
 
-        if (!cameraMode){
-            MirrorX=cameraMirrorX;
-        }
-
+        MirrorX=cameraMirrorX;
     }
 
-    public void IRCamerainit(){
+    public void IRCamerainit(boolean GLE){
         cameraPreviewBuffer = new byte[(int) (CameraController.CAMERA_HEIGHT * CameraController.CAMERA_WIDTH * 1.5)];//1.5 for yuv image
         if (cameraMode){
             CameraController.getInstant().openCamera(true);
         }else{
             CameraController.getInstant().openCamera(false);
         }
-        CameraController.getInstant().startPreview(new SurfaceTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES), this, cameraPreviewBuffer,0);
+        if (GLE){
+            CameraController.getInstant().startPreview(new SurfaceTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES), this, cameraPreviewBuffer,0);
+        }else {
+            CameraController.getInstant().startPreview(mSurfaceTexture, this, cameraPreviewBuffer,0);
+        }
+
         Log.i(TAG, "IRCamerainit:  startPreview front" );
     }
 
@@ -106,13 +110,17 @@ public class CameraView extends TextureView implements TextureView.SurfaceTextur
 
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+        mSurfaceTexture=surface;
         if (cameraMode){
             CameraController.getInstant().openCamera(true);
         }else{
             CameraController.getInstant().openCamera(false);
         }
         cameraPreviewBuffer = new byte[(int) (CameraController.CAMERA_HEIGHT * CameraController.CAMERA_WIDTH * 1.5)];//1.5 for yuv image
-        CameraController.getInstant().startPreview(surface, this, cameraPreviewBuffer,1);
+        if (!cameraMode){
+            CameraController.getInstant().startPreview(surface, this, cameraPreviewBuffer,1);
+        }
+
         Log.d(TAG, "onSurfaceTextureAvailable: startPreview "+(cameraMode?"front":"back"));
     }
 
