@@ -1,0 +1,1204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidConfiguredLogFilters">
+    <filters>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="wffrdualcamapp" />
+        <option name="name" value="wffrdualcamapp" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="RegisterDBHandler" />
+        <option name="name" value="RegisterDBHandler" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="EIFace" />
+        <option name="name" value="EIFace" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="RegisterDBActivity" />
+        <option name="name" value="RegisterDBActivity" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="CameraActivity" />
+        <option name="name" value="CameraActivity" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="RegisterActivity" />
+        <option name="name" value="RegisterActivity" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="CameraView" />
+        <option name="name" value="CameraView" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+    </filters>
+  </component>
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1f3ac810-ed8a-451e-b738-ca41f3e8d813" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/ei_library/libs/layoutlib.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/commons/utils/CursorUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/commons/utils/FileUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/commons/utils/HttpUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/core/manager/OTA/OTAManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ota/OTACore.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ei_library/src/main/jniLibs/arm64-v8a/libOTA.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ei_library/src/main/jniLibs/arm64-v8a/libserial_port.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ei_library/src/main/jniLibs/armeabi-v7a/libOTA.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/Handler/RegisterHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/MyApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/MyApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/activity/CameraActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/activity/CameraActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/activity/RegisterActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/activity/RegisterDBActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/activity/RegisterDBActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/activity/RegisterIMGActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/activity/RegisterIMGActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/view/CameraView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/view/CameraView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_img.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_img.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/view_user_info.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/view_user_info.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ei_library/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/ei_library/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ei_library/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ei_library/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/EIFace.java" beforeDir="false" afterPath="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/EIFace.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/commons/utils/AssetFileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/commons/utils/AssetFileUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/core/api/SysApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/core/api/SysApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ei_library/src/main/java/com/wf/wffrapp.java" beforeDir="false" afterPath="$PROJECT_DIR$/ei_library/src/main/java/com/wf/wffrapp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ei_library/src/main/java/com/wf/wffrdualcamapp.java" beforeDir="false" afterPath="$PROJECT_DIR$/ei_library/src/main/java/com/wf/wffrdualcamapp.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/core/api/SysApi.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="100">
+              <caret line="4" column="60" selection-start-line="4" selection-start-column="60" selection-end-line="4" selection-end-column="60" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/activity/CameraActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="475">
+              <caret line="70" column="18" selection-start-line="70" selection-start-column="18" selection-end-line="70" selection-end-column="18" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#initview#0;class#CameraActivity#0" />
+                <element signature="method#onClick#0;class#CameraActivity#0" />
+                <element signature="method#updateUI#0;class#CameraActivity#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/view/CameraDetectView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="277">
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_camera.xml">
+          <provider editor-type-id="android-designer2" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3950">
+              <caret line="158" column="38" selection-start-line="158" selection-start-column="38" selection-end-line="158" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>com.wf.wffrdualcamapp</find>
+      <find>mRegisterDBUserInforAdapter</find>
+      <find>INIT_DATA</find>
+      <find>STATE</find>
+      <find>msv_cameraFront</find>
+      <find>isEnrolling</find>
+      <find>abstract</find>
+      <find>initialize</find>
+      <find>DIALOG_DISMISS</find>
+      <find>jpeg</find>
+      <find>register RecordID</find>
+      <find>finish_state</find>
+      <find>select_Netpicture</find>
+      <find>updateFromPCDB</find>
+      <find>Enroll</find>
+      <find>version</find>
+      <find>src</find>
+      <find>headImageView</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bestom/ei_face/view/SeekBarPreference.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bestom/ei_face/SettingActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/Camera1Activity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/EnrolledDatabaseActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/view/adapter/EnrolledUserAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/view/MainSurfaceView.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_camera1.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/Control/CameraViewController.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/attrs.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/view/adapter/RegisterDB_UserInforAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/Handler/RegisterDBHandler.java" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/commons/constant/DBConstant.java" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/java/com/wf/wffrjni.java" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/core/api/DBApi.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/Control/CameraDataQueueController.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/Handler/RegisterHandler.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/activity/RegisterActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/view/RegisterDialog.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/view/CameraDetectView.java" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/core/manager/shell/ShellManager.java" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/core/manager/Shell/ShellManager.java" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/core/manager/File/ArmFreqUtils.java" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/commons/constant/Const.java" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/core/manager/Serial/SerialManager.java" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/core/manager/File/FilesManager.java" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/core/manager/File/FilesHelper.java" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/java/com/wf/wffrapp.java" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/commons/utils/HttpUtil.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/activity/RegisterDBActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_register_img.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/MyApp.java" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/commons/utils/FileUtil.java" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/commons/utils/AssetFileUtil.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/activity/RegisterIMGActivity.java" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/commons/constant/EICode.java" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/java/com/wf/wffrdualcamapp.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/view/CameraView.java" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/EIFace.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ota/OTACore.java" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/core/manager/OTA/OTAManager.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/ei_library/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/activity/CameraActivity.java" />
+        <option value="$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/core/api/SysApi.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/view_user_info.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1" />
+    <option name="width" value="1919" />
+    <option name="height" value="1040" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="EI_Face" type="58d84e3e:PackageViewProjectNode" />
+              <item name="app" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ei_library" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ei_library" type="616d4139:PackageViewModuleNode" />
+              <item name="com" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ei_library" type="616d4139:PackageViewModuleNode" />
+              <item name="com" type="1f31426a:PackageElementNode" />
+              <item name="bestom" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ei_library" type="616d4139:PackageViewModuleNode" />
+              <item name="com" type="1f31426a:PackageElementNode" />
+              <item name="bestom" type="1f31426a:PackageElementNode" />
+              <item name="ei_library" type="1f31426a:PackageElementNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="EI_Face" type="1abcf292:AndroidViewProjectNode" />
+              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EI_Face" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EI_Face" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EI_Face" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="libs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EI_Face" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="libs" type="462c0819:PsiDirectoryNode" />
+              <item name="armeabi-v7a" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EI_Face" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EI_Face" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EI_Face" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EI_Face" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ei_library" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EI_Face" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ei_library" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="libs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EI_Face" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ei_library" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EI_Face" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ei_library" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EI_Face" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ei_library" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EI_Face" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ei_library" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="android_serialport_api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EI_Face" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ei_library" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EI_Face" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ei_library" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="bestom" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EI_Face" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ei_library" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="bestom" type="462c0819:PsiDirectoryNode" />
+              <item name="ei_library" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EI_Face" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ei_library" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="bestom" type="462c0819:PsiDirectoryNode" />
+              <item name="ei_library" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EI_Face" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ei_library" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="bestom" type="462c0819:PsiDirectoryNode" />
+              <item name="ei_library" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EI_Face" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ei_library" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="jniLibs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EI_Face" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ei_library" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="jniLibs" type="462c0819:PsiDirectoryNode" />
+              <item name="armeabi-v7a" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EI_Face" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DEBUGGABLE_DEVICE" value="rockchip-kdg3288-0123456789ABCDEF" />
+    <property name="DEBUGGABLE_PROCESS" value="com.bestom.ei_face" />
+    <property name="DEBUGGER_ID" value="Auto" />
+    <property name="SHOW_ALL_PROCESSES" value="false" />
+    <property name="android.sdk.path" value="D:/Android/sdk" />
+    <property name="device.picker.selection" value="192.168.1.132:5555" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/ei_library/src/main/java" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../T102/StressTest" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/../HotelFace_EI/app/src/main/java/com/wf/wffrdualcamapp.java" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Work\Android\EI_HotelFace\EI_Face\app\libs" />
+      <recent name="D:\Work\Android\EI_HotelFace\EI_Face\ei_library\libs" />
+      <recent name="D:\Work\Android\EI_HotelFace\EI_Face\ei_library\src\main\jniLibs" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.bestom.ota" />
+      <recent name="com.bestom.ei_library.commons.utils" />
+      <recent name="com.bestom.ei_library.core.manager.File" />
+      <recent name="com.bestom.ei_library.core.manager.shell" />
+      <recent name="com.bestom.ei_library.core.api" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Work\Android\EI_HotelFace\EI_Face\ei_library\src\main\jniLibs\arm64-v8a" />
+      <recent name="D:\Work\Android\EI_HotelFace\EI_Face\ei_library\src\main\jniLibs" />
+      <recent name="D:\Work\Android\EI_HotelFace\EI_Face\ei_library\src\main" />
+      <recent name="D:\Work\Android\EI_HotelFace\EI_Face\ei_library\libs" />
+      <recent name="D:\Work\Android\EI_HotelFace\EI_Face\ei_library\src\main\jniLibs\armeabi-v7a" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="&lt;template&gt;" type="Applet" default="true" selected="false">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+    </configuration>
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1f3ac810-ed8a-451e-b738-ca41f3e8d813" name="Default Changelist" comment="" />
+      <created>1573537229995</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1573537229995</updated>
+    </task>
+    <task id="LOCAL-00001" summary="first commit on 20191112">
+      <created>1573540648852</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1573540648852</updated>
+    </task>
+    <task id="LOCAL-00002" summary="1.add imgregister function &#10;2.add filesmanager to control gpio replace old shellmanager control gpio">
+      <created>1573713746079</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1573713746079</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <layout>
+      <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.2306867" />
+      <window_info id="Structure" order="2" side_tool="true" />
+      <window_info id="Build Variants" order="3" side_tool="true" />
+      <window_info id="Image Layers" order="4" />
+      <window_info id="Designer" order="5" />
+      <window_info id="Resources Explorer" order="6" />
+      <window_info id="Capture Tool" order="7" />
+      <window_info id="Favorites" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Build" order="0" sideWeight="0.49839056" visible="true" weight="0.39768785" />
+      <window_info anchor="bottom" id="Run" order="1" weight="0.60231215" />
+      <window_info anchor="bottom" id="Logcat" order="2" sideWeight="0.49839056" weight="0.6936416" />
+      <window_info anchor="bottom" id="TODO" order="3" />
+      <window_info anchor="bottom" id="Android Profiler" order="4" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Find" order="5" weight="0.32947975" />
+      <window_info anchor="bottom" id="Terminal" order="6" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.40346822" />
+      <window_info anchor="bottom" id="Flutter Performance" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32947975" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50160944" side_tool="true" weight="0.39768785" />
+      <window_info anchor="bottom" id="Messages" order="11" />
+      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" weight="0.46620172" />
+      <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="right" id="Theme Preview" order="2" />
+      <window_info anchor="right" id="Flutter Inspector" order="3" />
+      <window_info anchor="right" id="Flutter Outline" order="4" />
+      <window_info anchor="right" id="Gradle" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Preview" order="7" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first commit on 20191112" />
+    <MESSAGE value="1.add imgregister function &#10;2.add filesmanager to control gpio replace old shellmanager control gpio" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.add imgregister function &#10;2.add filesmanager to control gpio replace old shellmanager control gpio" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/EIFace.java</url>
+          <line>92</line>
+          <properties />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/activity/CameraActivity.java</url>
+          <line>238</line>
+          <properties />
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/commons/utils/DataTurn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="436" column="37" selection-start-line="436" selection-start-column="34" selection-end-line="436" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Android/sdk/platforms/android-28/android.jar!/android/app/Activity.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="439" column="19" selection-start-line="439" selection-start-column="19" selection-end-line="439" selection-end-column="19" />
+          <folding>
+            <element signature="e#12642#12643#0" expanded="true" />
+            <element signature="e#12693#12694#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Android/sdk/platforms/android-28/android.jar!/android/widget/EditText.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/commons/utils/CursorUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" column="50" selection-start-line="7" selection-start-column="50" selection-end-line="7" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Android/sdk/platforms/android-28/android.jar!/android/view/Window.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="162" column="16" selection-start-line="162" selection-start-column="16" selection-end-line="162" selection-end-column="16" />
+          <folding>
+            <element signature="e#5445#5446#0" expanded="true" />
+            <element signature="e#5496#5497#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_register_img.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="20" column="30" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/MyApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="55" column="33" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/activity/RegisterActivity.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/Handler/RegisterHandler.java" />
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/commons/utils/FileUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="31" column="24" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/activity/RegisterDBActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2456">
+          <caret line="271" column="35" selection-start-line="271" selection-start-column="23" selection-end-line="271" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#showDeleteDialog#0;class#RegisterDBActivity#0" />
+            <element signature="class#8665:9228" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/core/api/DBApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="45" column="23" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/activity/RegisterIMGActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="212" selection-start-line="212" selection-end-line="212" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1743#1986#0" expanded="true" />
+            <element signature="e#1985#1986#0" expanded="true" />
+            <element signature="e#7207#7208#0" expanded="true" />
+            <element signature="e#7229#7230#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/rockchip-kdg3288-0123456789ABCDEF/data/data/com.bestom.ei_face/shared_prefs/eidualcam.xml" />
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/java/com/wf/wffrapp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="443" column="4" selection-start-line="443" selection-start-column="4" selection-end-line="478" selection-end-column="5" />
+          <folding>
+            <element signature="method#setState#0;class#wffrapp#0" />
+            <element signature="method#startExecution#0;class#wffrapp#0" />
+            <element signature="method#stopExecution#0;class#wffrapp#0" />
+            <element signature="method#getDatabase#0;class#wffrapp#0" />
+            <element signature="method#getDatabaseNames#0;class#wffrapp#0" />
+            <element signature="method#deletePerson#0;class#wffrapp#0" />
+            <element signature="method#deletePersonbyName#0;class#wffrapp#0" />
+            <element signature="method#deleteDatabase#0;class#wffrapp#0" />
+            <element signature="method#runEnrollFromJpegFile#0;class#wffrapp#0" />
+            <element signature="method#runRecognizeFromJpegFile#0;class#wffrapp#0" />
+            <element signature="method#updateFromPCDB#0;class#wffrapp#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/view/CameraView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2801">
+          <caret line="260" lean-forward="true" selection-start-line="260" selection-end-line="260" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Saveimages#0;class#CameraView#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/commons/constant/EICode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/java/com/wf/wffrdualcamapp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="74" column="32" selection-start-line="74" selection-start-column="32" selection-end-line="74" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1400#1651#1" />
+            <element signature="e#1697#1945#1" />
+            <element signature="method#runEnrollFromJpegFile#0;class#wffrdualcamapp#0" />
+            <element signature="method#stopExecution#0;class#wffrdualcamapp#0" />
+            <element signature="method#getDatabase#0;class#wffrdualcamapp#0" />
+            <element signature="method#setState#0;class#wffrdualcamapp#0" />
+            <element signature="method#deletePerson#0;class#wffrdualcamapp#0" />
+            <element signature="method#deletePersonbyName#0;class#wffrdualcamapp#0" />
+            <element signature="method#deleteDatabase#0;class#wffrdualcamapp#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/commons/utils/AssetFileUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="71" column="19" selection-start-line="71" selection-start-column="19" selection-end-line="71" selection-end-column="19" />
+          <folding>
+            <element signature="e#1590#1591#0" expanded="true" />
+            <element signature="e#1621#1622#0" expanded="true" />
+            <element signature="e#1656#1657#0" expanded="true" />
+            <element signature="e#1687#1688#0" expanded="true" />
+            <element signature="e#1723#1724#0" expanded="true" />
+            <element signature="e#1755#1756#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/java/com/wf/wffrjniID.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1975">
+          <caret line="164" column="20" selection-start-line="164" selection-start-column="15" selection-end-line="164" selection-end-column="20" />
+          <folding>
+            <element signature="method#tryEnrollandRecogWithImage#0;class#wffrjniID#0" />
+            <element signature="method#startExecution#0;class#wffrjniID#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/jniLibs/armeabi-v7a/libOTA.so">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" column="54" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-100">
+          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="23" column="42" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/core/manager/Serial/SerialManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="825">
+          <caret line="42" column="12" selection-start-line="42" selection-start-column="12" selection-end-line="46" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/core/manager/Shell/ShellManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/core/manager/File/FilesManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="28" column="5" lean-forward="true" selection-start-line="21" selection-start-column="4" selection-end-line="28" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1091#1092#0" expanded="true" />
+            <element signature="e#1120#1121#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/libs/arm64-v8a/libwffr.so">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/ei_library/libs/layoutlib.jar!/android/os/SystemProperties.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ota/OTACore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" column="26" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
+          <folding>
+            <element signature="method#installPackage#0;class#OTACore#0" />
+            <element signature="method#checkRKimage#0;class#OTACore#0" />
+            <element signature="method#getCurrentFirmwareVersion#0;class#OTACore#0" />
+            <element signature="method#getSystemVersion#0;class#OTACore#0" />
+            <element signature="method#getProductSN#0;class#OTACore#0" />
+            <element signature="method#getOtaPackageFileName#0;class#OTACore#0" />
+            <element signature="method#getRKimageFileName#0;class#OTACore#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/EIFace.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" column="48" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/java/com/wf/wffrjni.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/jniLibs/arm64-v8a/libwffr.so">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/jniLibs/arm64-v8a/libOTA.so">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/jniLibs/arm64-v8a/libserial_port.so">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/default_face.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/Control/CameraController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="28" column="17" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/java/android_serialport_api/SerialPort.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="602">
+          <caret line="96" column="5" selection-start-line="96" selection-start-column="5" selection-end-line="96" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/core/manager/OTA/OTAManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="592">
+          <caret line="66" column="5" lean-forward="true" selection-start-line="56" selection-start-column="4" selection-end-line="66" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1016#1017#0" expanded="true" />
+            <element signature="e#1065#1066#0" expanded="true" />
+            <element signature="e#1113#1114#0" expanded="true" />
+            <element signature="e#1171#1172#0" expanded="true" />
+            <element signature="e#1208#1209#0" expanded="true" />
+            <element signature="e#1255#1256#0" expanded="true" />
+            <element signature="e#1294#1295#0" expanded="true" />
+            <element signature="e#1343#1344#0" expanded="true" />
+            <element signature="e#1378#1379#0" expanded="true" />
+            <element signature="e#1423#1424#0" expanded="true" />
+            <element signature="e#1472#1473#0" expanded="true" />
+            <element signature="e#1516#1517#0" expanded="true" />
+            <element signature="e#1569#1570#0" expanded="true" />
+            <element signature="e#1617#1618#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/default_face.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="75" column="46" lean-forward="true" selection-start-line="75" selection-start-column="46" selection-end-line="75" selection-end-column="46" />
+          <folding>
+            <element signature="e#649#1008#0" />
+            <element signature="e#1018#1476#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/view_user_info.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="32" column="43" lean-forward="true" selection-start-line="32" selection-start-column="43" selection-end-line="32" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.hdodenhof/circleimageview/3.0.0/78063c6cf034f24292cf05a324e69091a58569cf/circleimageview-3.0.0-sources.jar!/de/hdodenhof/circleimageview/CircleImageView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ei_library/src/main/java/com/bestom/ei_library/core/api/SysApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" column="60" selection-start-line="4" selection-start-column="60" selection-end-line="4" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/activity/CameraActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="70" column="18" selection-start-line="70" selection-start-column="18" selection-end-line="70" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#initview#0;class#CameraActivity#0" />
+            <element signature="method#onClick#0;class#CameraActivity#0" />
+            <element signature="method#updateUI#0;class#CameraActivity#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_camera.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3950">
+          <caret line="158" column="38" selection-start-line="158" selection-start-column="38" selection-end-line="158" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/bestom/eiface/view/CameraDetectView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
