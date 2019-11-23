@@ -67,6 +67,7 @@ public class MyApp extends Application {
         Cachepath = EIFace.getCachepath();
 
         mSysApi.writeLed("1");
+        SPUtil.putValue(mContext, Settings.FACE_IR,false);
 
 //        copyAssets();
 //        initwff();

@@ -24,7 +24,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.EventListener;
 import java.util.Random;
 
 import static com.bestom.eiface.MyApp.MirrorX;
@@ -65,7 +64,6 @@ public class CameraView extends TextureView implements TextureView.SurfaceTextur
         if (cameraMirrorX) {
             setScaleX(-1);
         }
-
     }
 
     private void init(Context context, AttributeSet attrs) {
@@ -160,7 +158,6 @@ public class CameraView extends TextureView implements TextureView.SurfaceTextur
                   boolean is_created=  file.createNewFile();
                     Log.i("DDDD", "run: is_created "+is_created);
 
-
                     FileOutputStream out= new FileOutputStream(file);
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     byte[] imageBytes = baos.toByteArray();
@@ -169,12 +166,10 @@ public class CameraView extends TextureView implements TextureView.SurfaceTextur
 
                     Log.i("DDDD", "run: file written");
                     out.close();
-
                 } catch (IOException e) {
                     Log.i("DDDD", "run: inside catch ");
                     e.printStackTrace();
                 }
-
             }
         }.run();
     }

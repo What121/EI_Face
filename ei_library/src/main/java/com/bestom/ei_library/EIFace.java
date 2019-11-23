@@ -47,9 +47,6 @@ public class EIFace {
 
         //log control
         setLog(true,0);
-
-        SPUtil.putValue(mContext, Settings.FACE_IR,false);
-
         return DualFilePath;
     }
 

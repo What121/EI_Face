@@ -102,11 +102,11 @@ public class CameraController {
     }
 
     public void closeCamera() {
-        if (frontCameraInfor.Camera!=null){
+        if (frontCameraInfor!=null && frontCameraInfor.Camera!=null){
             closeCamera(frontCameraInfor.Camera);
         }
         frontCameraInfor=null;
-        if (backCameraInfor.Camera!=null){
+        if (backCameraInfor!=null && backCameraInfor.Camera!=null){
             closeCamera(backCameraInfor.Camera);
         }
         backCameraInfor=null;
