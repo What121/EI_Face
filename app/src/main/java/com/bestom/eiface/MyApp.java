@@ -13,7 +13,7 @@ import com.bestom.ei_library.commons.constant.StatusCode;
 import com.bestom.ei_library.commons.utils.SPUtil;
 import com.bestom.ei_library.core.api.SerialApi;
 import com.bestom.ei_library.core.api.SysApi;
-import com.bestom.ei_library.core.service.Interface.Listener.RespSampleListener;
+import com.bestom.ei_library.commons.listener.RespSampleListener;
 import com.bestom.ei_library.commons.constant.Settings;
 
 public class MyApp extends Application {

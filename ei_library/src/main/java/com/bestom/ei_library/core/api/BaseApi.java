@@ -8,10 +8,10 @@ import com.bestom.ei_library.commons.constant.SerialCmdCode;
 import com.bestom.ei_library.commons.constant.StatusCode;
 import com.bestom.ei_library.commons.utils.DataTurn;
 import com.bestom.ei_library.commons.utils.MyUtil;
-import com.bestom.ei_library.core.service.Interface.Listener.DataReceivedListener;
-import com.bestom.ei_library.core.service.Interface.Listener.ParseCallback;
-import com.bestom.ei_library.core.service.Interface.Listener.RespListener;
-import com.bestom.ei_library.core.service.Interface.Listener.RespSampleListener;
+import com.bestom.ei_library.commons.listener.DataReceivedListener;
+import com.bestom.ei_library.commons.listener.ParseCallback;
+import com.bestom.ei_library.commons.listener.RespListener;
+import com.bestom.ei_library.commons.listener.RespSampleListener;
 import com.bestom.ei_library.core.service.SerialObservable;
 import com.bestom.ei_library.core.service.SerialObserver;
 

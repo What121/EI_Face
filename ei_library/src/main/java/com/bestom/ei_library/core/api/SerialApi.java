@@ -9,8 +9,8 @@ import com.bestom.ei_library.commons.constant.StatusCode;
 import com.bestom.ei_library.commons.exceptions.SerialException;
 import com.bestom.ei_library.commons.utils.DataTurn;
 import com.bestom.ei_library.core.manager.Serial.SerialManager;
-import com.bestom.ei_library.core.service.Interface.Listener.ParseCallback;
-import com.bestom.ei_library.core.service.Interface.Listener.RespSampleListener;
+import com.bestom.ei_library.commons.listener.ParseCallback;
+import com.bestom.ei_library.commons.listener.RespSampleListener;
 
 public class SerialApi extends BaseApi {
     private static final String TAG = "SerialApi";

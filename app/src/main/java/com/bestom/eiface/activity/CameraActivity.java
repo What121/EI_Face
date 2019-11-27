@@ -39,7 +39,6 @@ import com.bestom.eiface.R;
 import com.bestom.ei_library.commons.constant.Settings;
 import com.bestom.eiface.view.CameraDetectView;
 import com.bestom.eiface.view.CameraView;
-import com.wf.wffrdualcamapp;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -279,7 +278,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void initenroll(String registInfo){
-        wffrdualcamapp.setState(2);
+        EIFace.setState(2);
         registerView.setEnabled(false);
         backDetecView.isEnrolling(true);
         backCameraView.setEnrolled(registInfo,true);

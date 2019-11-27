@@ -153,8 +153,10 @@ public class CameraDetectView extends View {
 //                    canvas.drawCircle(cirX,cirY,cirR,paint);
 
                     if (nameList.size() > 0) {
-                        canvas.drawText(nameList.get(iValue), (leftV + rightV) / 2, (bottomV + 75), paint);
+                        // draw name
+//                        canvas.drawText(nameList.get(iValue), (leftV + rightV) / 2, (bottomV + 75), paint);
                     }
+
                 } else {
                     if (confidenceValList.size() != 0 && confidenceValList.get(iValue) == 0) {
                         paint.setColor(0xffFFFF00);

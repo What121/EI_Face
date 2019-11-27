@@ -1,4 +1,4 @@
-package com.bestom.ei_library.core.service.Interface.Listener;
+package com.bestom.ei_library.commons.listener;
 
 /**
  * 接收到数据监听

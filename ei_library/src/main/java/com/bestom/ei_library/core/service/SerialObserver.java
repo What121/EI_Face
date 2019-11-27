@@ -1,7 +1,7 @@
 package com.bestom.ei_library.core.service;
 
 import com.bestom.ei_library.core.service.Interface.IObser.Observer;
-import com.bestom.ei_library.core.service.Interface.Listener.DataReceivedListener;
+import com.bestom.ei_library.commons.listener.DataReceivedListener;
 
 /**
  * 观察者，接收串口数据 通知服务

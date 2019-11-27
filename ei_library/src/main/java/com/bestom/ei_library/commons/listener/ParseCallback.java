@@ -1,4 +1,4 @@
-package com.bestom.ei_library.core.service.Interface.Listener;
+package com.bestom.ei_library.commons.listener;
 
 /**
  * 解析数据得到结果
