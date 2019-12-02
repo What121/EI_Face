@@ -4,11 +4,22 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 通用工具类
  */
 public class MyUtil {
+
+    static public boolean IDCardEL(String id){
+        String EL="";
+
+        Pattern pattern=Pattern.compile(EL);
+        Matcher m = pattern.matcher(id);
+        boolean b = m.matches();
+        return b;
+    }
 
 
     /***************************************************************

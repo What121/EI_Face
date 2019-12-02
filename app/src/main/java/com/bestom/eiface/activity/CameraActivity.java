@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.bestom.ei_library.EIFace;
 import com.bestom.ei_library.commons.constant.EICode;
+import com.bestom.ei_library.commons.utils.MyUtil;
 import com.bestom.ei_library.commons.utils.PermissionsUtils;
 import com.bestom.ei_library.commons.utils.SPUtil;
 import com.bestom.eiface.Control.CameraController;
@@ -97,7 +98,6 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                 if (!upFlag){
                     updatePassUI();
                 }
-
             }
         }
     };
@@ -254,10 +254,20 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(mActivity, "Name Can't be empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (TextUtils.isEmpty(ID)) {
-                    Toast.makeText(mActivity, "ID Can't be empty", Toast.LENGTH_SHORT).show();
+
+                // use EL judge idCard NO.
+                if(!MyUtil.IDCardEL(ID)){
+                    Toast.makeText(mActivity, "IDCard NO. format error", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                //region simple judge idcard NO.
+//                if (TextUtils.isEmpty(ID)) {
+//                    Toast.makeText(mActivity, "ID Can't be empty", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+                //endregion
+
                 //endregion
                 //region 初始化注册
                 String registInfo = name + "," + ID;

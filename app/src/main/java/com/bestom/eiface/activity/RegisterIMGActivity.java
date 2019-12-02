@@ -27,6 +27,7 @@ import com.bestom.ei_library.EIFace;
 import com.bestom.ei_library.commons.utils.DataTurn;
 import com.bestom.ei_library.commons.utils.FileUtil;
 import com.bestom.ei_library.commons.utils.HttpUtil;
+import com.bestom.ei_library.commons.utils.MyUtil;
 import com.bestom.eiface.MyApp;
 import com.bestom.eiface.R;
 
@@ -137,10 +138,19 @@ public class RegisterIMGActivity extends AppCompatActivity implements View.OnCli
                     Toast.makeText(mContext,"请填写姓名！",Toast.LENGTH_SHORT).show();
                     break;
                 }
+
+                // use EL judge idCard NO.
+                if(!MyUtil.IDCardEL(ID)){
+                    Toast.makeText(mActivity, "IDCard NO. format error", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                /*
                 if (TextUtils.isEmpty(ID)) {
                     Toast.makeText(mContext,"请填写身份证号！",Toast.LENGTH_SHORT).show();
                     break;
                 }
+                */
 
                 String registInfo = name + "," + ID;
                 userinfo.setVisibility(View.GONE);
