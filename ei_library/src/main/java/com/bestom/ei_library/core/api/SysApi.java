@@ -10,7 +10,7 @@ import java.io.File;
 
 import static com.bestom.ei_library.commons.constant.Const.REBOOT;
 
-public class SysApi extends BaseApi {
+public class SysApi{
     private ShellManager mShellManager;
     private Context mContext;
 

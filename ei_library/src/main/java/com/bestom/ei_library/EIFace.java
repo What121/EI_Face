@@ -52,6 +52,7 @@ public class EIFace {
 
     public static void Release(){
         closeSerial();
+        wffrjni.Release();
     }
 
     public static String getDualFilePath() {
@@ -125,7 +126,7 @@ public class EIFace {
         return wffrdualcamapp.stopExecution();
     }
 
-    public static int EnrollFromJpegFile(String imageFileName, String msg){
+    public static int EnrollFromJpegFile(String JpegFilePath, String msg){
         try {
             semaphore.acquire();
             int i = -3;
@@ -133,7 +134,7 @@ public class EIFace {
             String name = msg.substring(0, msg.lastIndexOf(',')).trim();
             if (DBApi.queryPersonInfoByID(id).getCount()<=0){
                 //算法注册
-                i = wffrdualcamapp.runEnrollFromJpegFile(imageFileName, id);
+                i = wffrdualcamapp.runEnrollFromJpegFile(JpegFilePath, id);
                 Log.d(TAG, "register RecordID: "+i);
                 //算法注册通过
                 if (i>=0){
@@ -163,7 +164,7 @@ public class EIFace {
         }
     }
 
-    public static void setFinishState(int val){
+    private static void setFinishState(int val){
         wffrdualcamapp.setFinishState(val);
     }
 
@@ -175,6 +176,25 @@ public class EIFace {
         return wffrdualcamapp.getFaceCoordinates();
     }
 
+    public static float[] getConfidence(){
+        return wffrdualcamapp.getConfidence();
+    }
+
+    public static String getNames(){
+        String id=getIDs();
+        if (!TextUtils.isEmpty(id.trim())){
+            return DBApi.queryPersonNameByID(id);
+        }
+        return "";
+    }
+
+    public static String getIDs(){
+        if (wffrdualcamapp.getNames().length!=0){
+            return wffrdualcamapp.getNames()[0];
+        }
+        return "";
+    }
+
     public static long getT2(){
         return wffrdualcamapp.t2;
     }
@@ -183,7 +203,7 @@ public class EIFace {
      * set asset path
      * @param AssetPath
      */
-    public static void setAssetPath(String AssetPath){
+    private static void setAssetPath(String AssetPath){
         wffrdualcamapp.setAssetPath(DualFilePath);
     }
 
@@ -228,25 +248,6 @@ public class EIFace {
         return SPUtil.getValue(mContext,"threshold", wffrjni.GetRecognitionThreshold());
     }
 
-    public static float[] getConfidence(){
-        return wffrdualcamapp.getConfidence();
-    }
-
-    public static String getNames(){
-        String id=getIDs();
-        if (!TextUtils.isEmpty(id.trim())){
-            return DBApi.queryPersonNameByID(id);
-        }
-        return "";
-    }
-
-    public static String getIDs(){
-        if (wffrdualcamapp.getNames().length!=0){
-            return wffrdualcamapp.getNames()[0];
-        }
-        return "";
-    }
-
     public static long getTimeLeft(){
         return wffrdualcamapp.getTimeLeft();
     }
@@ -273,7 +274,9 @@ public class EIFace {
     }
 
     public static int deletePerson(int recordID){
-        return wffrdualcamapp.deletePerson(recordID);
+        int var = wffrdualcamapp.deletePerson(recordID);
+        DBApi.deletePersonInfoByRecordID(recordID);
+        return var;
     }
 
 
@@ -324,7 +327,7 @@ public class EIFace {
         }
     }
 
-    public static void initwff(){
+    private static void initwff(){
         setState(1);
 
         setFinishState(1);

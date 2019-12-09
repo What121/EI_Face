@@ -85,6 +85,9 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     ArrayList<String> IDList ;
     ArrayList<Float> confidenceValList;
 
+    private String passID="";
+    private int passtimes=0;
+
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler=new Handler() {
@@ -95,7 +98,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                 alertDialog.cancel();
             }else if (msg.what == UPDATE_PASSINFO){
                 mHandler.removeMessages(UPDATE_PASSINFO);
-                if (!upFlag){
+                if (!upFlag&&checkPassTimes()){
                     updatePassUI();
                 }
             }
@@ -191,7 +194,11 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onResume() {
 //        initCameraView();
-        EIFace.setState(1);
+        if (MyApp.face_state){
+            EIFace.setState(1);
+        }else {
+            EIFace.setState(0);
+        }
         PermissionsUtils.getInstance().chekPermissions(this, permissions, permissionsResult);
 
         Log.d(TAG, "onResume: ");
@@ -360,6 +367,29 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    private Boolean checkPassTimes(){
+        String nowID=IDList.get(0).trim();
+        if (nowID.equals("")){
+            return false;
+        }
+        if (nowID.equals(passID)){
+            passtimes++;
+            Log.d(TAG, "checkPassTimes ID : "+nowID+" pass times up "+passtimes);
+        }else {
+            passtimes=1;
+            passID=nowID;
+        }
+
+        if (passtimes>=MyApp.face_times){
+            //init default value
+            passtimes=0;
+            passID="";
+            return true;
+        }
+
+        return false;
+    }
+
     public void updatePassUI(){
         if (confidenceValList.size()>0){
             if (confidenceValList.get(0)>0){
@@ -448,7 +478,6 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                         confidenceValList.add(i, confidenceValues[i]);
                     }
                 }
-
 //                    long timeLeft = wffrdualcamapp.getTimeLeft();
                 long timeLeft = EIFace.getTimeLeft();
 

@@ -122,7 +122,6 @@ class BaseApi {
                 mHandler.removeCallbacks(this);
             }
         }, timeout);
-
     }
 
     /**************************************************************

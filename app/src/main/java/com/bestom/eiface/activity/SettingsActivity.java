@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -58,8 +59,12 @@ public class SettingsActivity extends AppCompatActivity {
                 -> SPUtil.putValue(mContext, Settings.FACE_IR,isChecked));
         //打开/关闭人脸实时检测
         shi_sw.setChecked(MyApp.face_state);
-        shi_sw.setOnCheckedChangeListener((buttonView, isChecked)
-                -> SPUtil.putValue(mContext, Settings.FACE_STATE,isChecked));
+        shi_sw.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            MyApp.face_state = isChecked;
+            SPUtil.putValue(mContext, Settings.FACE_STATE,isChecked);
+            Log.i(TAG,"face_state : "+MyApp.face_state);
+        });
+
         //打开/关闭继电器
         relay_sw.setOnCheckedChangeListener((compoundButton, b)
                 -> MyApp.mSysApi.writeRelay(b?"1":"0"));

@@ -13,14 +13,12 @@ import java.util.regex.Pattern;
 public class MyUtil {
 
     static public boolean IDCardEL(String id){
-        String EL="";
-
+        String EL="^[1-9]\\d{5}(18|19|2([0-9]))\\d{2}(0[0-9]|10|11|12)([0-2][1-9]|30|31)\\d{3}[0-9Xx]$";
         Pattern pattern=Pattern.compile(EL);
         Matcher m = pattern.matcher(id);
         boolean b = m.matches();
         return b;
     }
-
 
     /***************************************************************
      *  和校验

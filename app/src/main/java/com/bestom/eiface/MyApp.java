@@ -61,7 +61,8 @@ public class MyApp extends Application {
         face_times= SPUtil.getValue(mContext,Settings.FACE_TIMES,1);
 
         //初始化算法、串口
-        DualFilePath = EIFace.Initialize(mContext);
+        EIFace.Initialize(mContext);
+        DualFilePath=EIFace.getDualFilePath();
         Datapath = EIFace.getDatapath();
         Filepath = EIFace.getFilepath();
         Cachepath = EIFace.getCachepath();
@@ -69,8 +70,6 @@ public class MyApp extends Application {
         mSysApi.writeLed("1");
         SPUtil.putValue(mContext, Settings.FACE_IR,false);
 
-//        copyAssets();
-//        initwff();
 //        SerialManager.getInstance().turnOn();
 
         mtimehandler=new Handler();

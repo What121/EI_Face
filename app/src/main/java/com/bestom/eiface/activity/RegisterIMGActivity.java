@@ -235,7 +235,6 @@ public class RegisterIMGActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onBackPressed() {
-        EIFace.initwff();
         super.onBackPressed();
     }
 }
