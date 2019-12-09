@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -46,7 +45,6 @@ public class SettingsActivity extends AppCompatActivity {
         mUnbinder = ButterKnife.bind(mActivity);
 
         initview();
-
     }
 
     private void initview(){

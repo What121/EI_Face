@@ -95,6 +95,9 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         public void handleMessage(Message msg) {
             if (msg.what == DIALOG_DISMISS) {
                 registerView.setEnabled(true);
+                headImage.setImageResource(R.drawable.default_face);
+                nameEdit.setText("");
+                noEdit.setText("");
                 alertDialog.cancel();
             }else if (msg.what == UPDATE_PASSINFO){
                 mHandler.removeMessages(UPDATE_PASSINFO);
@@ -530,8 +533,6 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                 backDetecView.setRectValuesArray(null, null, null, null);
                 frontDetecView.setRectValuesArray(null, null, null, null);
             }
-
-
 
             backDetecView.invalidate();
             frontDetecView.invalidate();
