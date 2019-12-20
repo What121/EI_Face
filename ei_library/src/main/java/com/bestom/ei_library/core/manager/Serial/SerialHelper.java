@@ -23,10 +23,7 @@ abstract class SerialHelper {
     private SerialPort mSerialPort;
     private OutputStream mOutputStream;
     private InputStream mInputStream;
-    private DataReceivedThread mDataReceivedThread;
     private ReadThread mReadThread;
-    private byte[] buffer = new byte[500];
-    private int size=0;
 
     private com.bestom.ei_library.commons.utils.DataTurn DataTurn=new DataTurn();
     //private ExecutorService mReadPool;
@@ -64,9 +61,6 @@ abstract class SerialHelper {
         mInputStream = mSerialPort.getInputStream();
 
         _isOpen=true;
-
-        mDataReceivedThread=new DataReceivedThread();
-        mDataReceivedThread.start();
 
         mReadThread = new ReadThread();
         mReadThread.start();
@@ -127,21 +121,6 @@ abstract class SerialHelper {
         send(bOutArray);
     }
 
-    private class DataReceivedThread extends Thread {
-        @Override
-        public void run() {
-            super.run();
-            while (_isOpen) {
-                if (size>0){
-                    byte[] bs = MyUtil.subBytes(buffer, 0, size);
-                    Log.i("receiver","send onDataReceived---size is "+size);
-                    onDataReceived (bs, size);
-                    size=0;
-                }
-            }
-        }
-    }
-
     /**********************************************************
      * read 线程
      */
@@ -153,11 +132,19 @@ abstract class SerialHelper {
                 while (_isOpen&&(!isInterrupted())) {
                     try {
                         //serial read thread slepp 1 seconds,between to update application data on this times;
-                        sleep(1000);
+//                        sleep(1000);
                         if (mInputStream == null) {
                             return;
                         }
-                        size = mInputStream.read(buffer);
+
+                        byte[] buffer = new byte[100];
+                        int size = mInputStream.read(buffer);
+
+                        if (size>0){
+                            byte[] bs = MyUtil.subBytes(buffer, 0, size);
+                            onDataReceived (bs, size);
+                            Log.i(TAG,"onDataReceived---size is "+size);
+                        }
 
                     } catch (Throwable e) {
                         e.printStackTrace();

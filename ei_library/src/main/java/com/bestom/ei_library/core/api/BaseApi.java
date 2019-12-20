@@ -80,33 +80,30 @@ class BaseApi {
         final boolean[] isHas = {false}; //是否存在结果数据
 
         final SerialObserver timeRespobserver = new SerialObserver();
-        timeRespobserver.setOnDataReceivedListener(new DataReceivedListener() {
-            @Override
-            public void data(String dataHex) {
-                //Log.i(TAG, "DATA HEX:" + dataHex);
-                if (dataHex.startsWith(Const.Serial_Send_MAGIC) && dataHex.length() >= 10 &&
-                        dataHex.substring(6, 8).equals(code.getHexStr())) {
-                    isHas[0] = true; //存在结果数据
-                    int bodysize = DataTurn.HexToInt(dataHex.substring(4, 6));
-                    int allsize = 6 + bodysize * 2;
-                    if (dataHex.length() == allsize) {
-                        String checkvalue = dataHex.substring(0, dataHex.length()-2);
-                        String check = MyUtil.sumCheck(checkvalue);
-                        if (check.equalsIgnoreCase(dataHex.substring(dataHex.length()-2))) {
-                            String responsebody = dataHex.substring(6,dataHex.length()-2);
-                            Log.i("Serial--response", "" + responsebody);
-                            callback.result(responsebody);
-                        } else { //校验位错误
-                            listener.onFailure(StatusCode.CHECK_ERR.getCode(),
-                                    StatusCode.FORMAT_ERR.getMsg());
-                        }
-                    } else { //数据格式错误
-                        listener.onFailure(StatusCode.FORMAT_ERR.getCode(),
+        timeRespobserver.setOnDataReceivedListener(dataHex -> {
+            //Log.i(TAG, "DATA HEX:" + dataHex);
+            if (dataHex.startsWith(Const.Serial_Send_MAGIC) && dataHex.length() >= 10 &&
+                    dataHex.substring(6, 8).equals(code.getHexStr())) {
+                isHas[0] = true; //存在结果数据
+                int bodysize = DataTurn.HexToInt(dataHex.substring(4, 6));
+                int allsize = 6 + bodysize * 2;
+                if (dataHex.length() == allsize) {
+                    String checkvalue = dataHex.substring(0, dataHex.length()-2);
+                    String check = MyUtil.sumCheck(checkvalue);
+                    if (check.equalsIgnoreCase(dataHex.substring(dataHex.length()-2))) {
+                        String responsebody = dataHex.substring(6,dataHex.length()-2);
+                        Log.i("Serial--response", "" + responsebody);
+                        callback.result(responsebody);
+                    } else { //校验位错误
+                        listener.onFailure(StatusCode.CHECK_ERR.getCode(),
                                 StatusCode.FORMAT_ERR.getMsg());
                     }
-                } else {
-
+                } else { //数据格式错误
+                    listener.onFailure(StatusCode.FORMAT_ERR.getCode(),
+                            StatusCode.FORMAT_ERR.getMsg());
                 }
+            } else {
+
             }
         });
         SerialObservable.getInstance().registerObserver(timeRespobserver);
@@ -188,8 +185,9 @@ class BaseApi {
      * @param code 应答类型
      * @param listener 监听
      * @param callback 返回
+     * 55 A5 04 D3 00 13 E4
      */
-    void noTimeregisterAndRemoveObserver(final SerialCmdCode code, final RespListener listener, final ParseCallback callback) {
+    void noTimeregisterObserver(final SerialCmdCode code, final RespSampleListener listener, final ParseCallback callback) {
         final boolean[] isHas = {false}; //是否存在结果数据
 
         final SerialObserver timeRespobserver = new SerialObserver();
@@ -197,7 +195,7 @@ class BaseApi {
             @Override
             public void data(String dataHex) {
                 //Log.i(TAG, "DATA HEX:" + dataHex);
-                if (dataHex.startsWith(Const.Serial_Send_MAGIC) && dataHex.length() >= 10 &&
+                if (dataHex.startsWith(Const.Serial_Replay_MAGIC) && dataHex.length() >= 14 &&
                         dataHex.substring(6, 8).equals(code.getHexStr())) {
                     isHas[0] = true; //存在结果数据
                     int bodysize = DataTurn.HexToInt(dataHex.substring(4, 6));
@@ -206,7 +204,7 @@ class BaseApi {
                         String checkvalue = dataHex.substring(0, dataHex.length()-2);
                         String check = MyUtil.sumCheck(checkvalue);
                         if (check.equalsIgnoreCase(dataHex.substring(dataHex.length()-2))) {
-                            String responsebody = dataHex.substring(6,dataHex.length()-2);
+                            String responsebody = dataHex.substring(8,dataHex.length()-2);
                             Log.i("Serial--response", "" + responsebody);
                             callback.result(responsebody);
                         } else { //校验位错误

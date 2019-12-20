@@ -434,6 +434,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
             if (EIFace.getFinishState()==-1){
                 finish();
             }
+            long startdraw = System.currentTimeMillis();
 
             if(facesArray!=null){
 //                    float confidenceValuesCamera[] = wffrdualcamapp.getConfidence();//get Confidence Array from NDK
@@ -536,6 +537,9 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
 
             backDetecView.invalidate();
             frontDetecView.invalidate();
+            long finishdraw = System.currentTimeMillis();
+            Log.e("**Time**", "\nstartdraw:"+startdraw+"\nfinishdraw:"+finishdraw+"\nDrawTime"+(finishdraw-startdraw) );
+
         });
     }
 

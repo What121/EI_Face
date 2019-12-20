@@ -100,6 +100,8 @@ public class SerialManager extends SerialHelper {
         super.sendHex(sHex);
     }
 
+
+    //55 A5 04 D3 00 13 E4
     private class CheckDataThread extends Thread {
         @Override
         public void run() {
@@ -107,8 +109,8 @@ public class SerialManager extends SerialHelper {
             int index;
             while (_iSerialflag){
                 index= dataBuilder.indexOf(Const.Serial_Replay_MAGIC);
-                    if ((index == 0)&&dataBuilder.length() >= 6) {
-//                    55 a5 03 d1 00/01 **(check)
+                    if ((index == 0)&&dataBuilder.length() >= 14) {
+//                    55A5 04 D300D3A4
                             String body_size_Hex = dataBuilder.substring(4, 6);
                             int body_size = new  DataTurn().HexToInt(body_size_Hex);
                             int all_size = 6 + body_size * 2;
@@ -131,6 +133,7 @@ public class SerialManager extends SerialHelper {
 
     @Override
     protected void onDataReceived(byte[] buffer, int size) {
+        //55A504D300D3A4
         dataBuilder.append(DataTurn.ByteArrToHex(buffer));
         Log.d("receiver", "onDataReceived dataBuilder is "+dataBuilder.toString());
         if (mCheckDataThread==null){

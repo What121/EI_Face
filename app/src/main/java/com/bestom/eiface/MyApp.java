@@ -8,12 +8,9 @@ import android.os.PowerManager;
 import android.util.Log;
 
 import com.bestom.ei_library.EIFace;
-import com.bestom.ei_library.commons.constant.SerialCmdCode;
-import com.bestom.ei_library.commons.constant.StatusCode;
 import com.bestom.ei_library.commons.utils.SPUtil;
 import com.bestom.ei_library.core.api.SerialApi;
 import com.bestom.ei_library.core.api.SysApi;
-import com.bestom.ei_library.commons.listener.RespSampleListener;
 import com.bestom.ei_library.commons.constant.Settings;
 
 public class MyApp extends Application {
@@ -46,8 +43,6 @@ public class MyApp extends Application {
         //初始化
         init();
 
-        //check change Screen state by randa
-//        checkScreanLight();
 
         checkScreenThread.start();
     }
@@ -81,27 +76,6 @@ public class MyApp extends Application {
 
         Log.d(TAG, "init: finished");
     }
-
-    private void checkScreanLight(){
-        mSerialApi.setStatus(SerialCmdCode.SERIAL_CMD_STATUS, true, new RespSampleListener<String>() {
-            @Override
-            public void onSuccess(int code, String s) {
-                Log.d(TAG, "setStatus onSuccess: code"+code+" ,msg:"+s);
-                if (code== StatusCode.SUCCESS.getCode()){
-                    //打开radar成功,获取数据
-                    checkScreenThread.start();
-                }else {
-                    Log.d(TAG, "setStatus onSuccess code: "+code+" ,msg is "+s);
-                }
-            }
-
-            @Override
-            public void onFailure(int code, String errMsg) {
-                Log.e(TAG, "setStatus onFailure code: "+code+",errmsg is "+errMsg);
-            }
-        });
-    }
-
     //region checkScreenThread
     private Thread checkScreenThread=new Thread(new Runnable() {
         @Override

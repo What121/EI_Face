@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public abstract class FilesHelper {
@@ -13,16 +14,25 @@ public abstract class FilesHelper {
 
     public boolean write(File file, String message) throws IOException {
         if (file.exists()) {
-            if (file.canWrite()) {
-                FileOutputStream fout = new FileOutputStream(file);
-                byte[] bytes = message.getBytes();
-                fout.write(bytes);
-                fout.close();
-            } else {
-                Log.e(TAG, file.toString() + "can not write");
-                IOException io = new IOException();
-                throw io;
-            }
+            FileWriter fwrite = new FileWriter(file);
+            fwrite.write(message);
+            fwrite.close();
+
+//            FileOutputStream fout = new FileOutputStream(file);
+//            byte[] bytes = message.getBytes();
+//            fout.write(bytes);
+//            fout.close();
+
+//            if (file.canWrite()) {
+//                FileOutputStream fout = new FileOutputStream(file);
+//                byte[] bytes = message.getBytes();
+//                fout.write(bytes);
+//                fout.close();
+//            } else {
+//                Log.e(TAG, file.toString() + "can not write");
+//                IOException io = new IOException();
+//                throw io;
+//            }
             return true;
         }else {
             return false;

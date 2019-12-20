@@ -85,6 +85,7 @@ public class wffrdualcamapp {
                 names = wffrjni.nameValues();
                 confidence = wffrjni.confidenceValues();
                 long elapsedTime1 = timeMillis1 - startTime;
+                Log.e("**Time**", "\nRec Time::"+elapsedTime1+"\nProcess Time:"+t1+"ms" );
 //                System.out.println("WFFRJNI: Rec Time: " + elapsedTime1 + " Process Time " + t1 + "ms"  );
                 if (elapsedTime1 > (long) recognizeTime) {
                     System.out.println("WFFRJNI: Release");

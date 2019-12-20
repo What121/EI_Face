@@ -84,7 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:msv_cameraFront="false"
-                app:msv_cameraMirrorX="false" />
+                app:msv_cameraMirrorX="true" />
 
             <com.bestom.eiface.view.CameraDetectView
                 android:id="@+id/cameraDetect_back"

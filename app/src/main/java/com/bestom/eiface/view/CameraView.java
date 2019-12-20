@@ -72,12 +72,13 @@ public class CameraView extends TextureView implements TextureView.SurfaceTextur
         if (attrs != null) {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CameraSurfaceView);
             cameraMode = a.getBoolean(R.styleable.CameraSurfaceView_msv_cameraFront,cameraMode);
-            cameraMirrorX = a.getBoolean(R.styleable.CameraSurfaceView_msv_cameraMirrorX, cameraMirrorX);
-            cameraVertical = a.getBoolean(R.styleable.CameraSurfaceView_msv_cameraVertical, cameraVertical);
+            if (!cameraMode){
+                cameraMirrorX = a.getBoolean(R.styleable.CameraSurfaceView_msv_cameraMirrorX, cameraMirrorX);
+                MirrorX=cameraMirrorX;
+            }
+                cameraVertical = a.getBoolean(R.styleable.CameraSurfaceView_msv_cameraVertical, cameraVertical);
             a.recycle();
         }
-
-        MirrorX=cameraMirrorX;
     }
 
     public void IRCamerainit(boolean GLE){
@@ -252,7 +253,10 @@ public class CameraView extends TextureView implements TextureView.SurfaceTextur
             if (EIFace.getState()==0){
                 cameraActivity.drawOutput(null, CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT, enroll);
             }else {
+                long starttime = System.currentTimeMillis();
                 int flag = EIFace.startExecution(frameInfos[0].clrFrame, frameInfos[0].irFrame, CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT,frameInfos[0].msg);
+                long EIfinishtim = System.currentTimeMillis();
+                Log.e("**Time**", "\nstarttime:"+starttime+"\nEIfinishtime:"+EIfinishtim+"\nEITime"+(EIfinishtim-starttime) );
                 cameraActivity.drawOutput(EIFace.getFaceCoordinates(), CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT, enroll);
                 if(enroll){
                     //Main ui
