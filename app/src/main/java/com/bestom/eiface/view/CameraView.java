@@ -138,7 +138,11 @@ public class CameraView extends TextureView implements TextureView.SurfaceTextur
     @Override
     public void onSurfaceTextureUpdated(SurfaceTexture surface) {
 //        Log.d(TAG, "onSurfaceTextureUpdated: ");
-        cameraActivity.drawOutput(EIFace.getFaceCoordinates(), CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT, enroll);
+        if (EIFace.getState()==0){
+            cameraActivity.drawOutput(null, CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT, enroll);
+        }else {
+            cameraActivity.drawOutput(EIFace.getFaceCoordinates(), CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT, enroll);
+        }
     }
 
     //region Saveimages
