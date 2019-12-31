@@ -371,25 +371,26 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private Boolean checkPassTimes(){
-        String nowID=IDList.get(0).trim();
-        if (nowID.equals("")){
-            return false;
-        }
-        if (nowID.equals(passID)){
-            passtimes++;
-            Log.d(TAG, "checkPassTimes ID : "+nowID+" pass times up "+passtimes);
-        }else {
-            passtimes=1;
-            passID=nowID;
-        }
+        if (IDList.size()>=1){
+            String nowID=IDList.get(0).trim();
+            if (nowID.equals("")){
+                return false;
+            }
+            if (nowID.equals(passID)){
+                passtimes++;
+                Log.d(TAG, "checkPassTimes ID : "+nowID+" pass times up "+passtimes);
+            }else {
+                passtimes=1;
+                passID=nowID;
+            }
 
-        if (passtimes>=MyApp.face_times){
-            //init default value
-            passtimes=0;
-            passID="";
-            return true;
+            if (passtimes>=MyApp.face_times){
+                //init default value
+                passtimes=0;
+                passID="";
+                return true;
+            }
         }
-
         return false;
     }
 
@@ -537,8 +538,9 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
 
             backDetecView.invalidate();
             frontDetecView.invalidate();
+
             long finishdraw = System.currentTimeMillis();
-            Log.e("**Time**", "\nstartdraw:"+startdraw+"\nfinishdraw:"+finishdraw+"\nDrawTime"+(finishdraw-startdraw) );
+//            Log.e("**Time**", "\nstartdraw:"+startdraw+"\nfinishdraw:"+finishdraw+"\nDrawTime"+(finishdraw-startdraw) );
 
         });
     }

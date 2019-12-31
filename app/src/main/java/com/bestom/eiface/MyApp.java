@@ -62,7 +62,7 @@ public class MyApp extends Application {
         Filepath = EIFace.getFilepath();
         Cachepath = EIFace.getCachepath();
 
-        mSysApi.writeLed("1");
+        mSysApi.writeLed("0");
         SPUtil.putValue(mContext, Settings.FACE_IR,false);
 
 //        SerialManager.getInstance().turnOn();

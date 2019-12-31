@@ -15,20 +15,45 @@ import com.bestom.ei_library.core.manager.Serial.SerialManager;
 import com.wf.wffrdualcamapp;
 import com.wf.wffrjni;
 
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
 
 public class EIFace {
     private static final String TAG = "EIFace";
     private static Context mContext;
 
-    private static String[] binfiles = {"b1.bin", "f160tm.bin","p0.bin", "p1tc.bin", "p2tc.bin", "p3tc.bin", "p4tc.bin", "q31tm.bin","q103tm.bin", "s11tm.bin"};
+//    private static String[] binfiles = {"b1.bin", "f160tm.bin","p0.bin", "p1tc.bin", "p2tc.bin", "p3tc.bin", "p4tc.bin", "q31tm.bin","q103tm.bin", "s11tm.bin"};
+    private static String[] binfiles = {"b1.bin", "f160tm.bin","p0.bin", "p1tc.bin", "p2tc.bin", "p3tc.bin", "p4tc.bin", "q35tm.bin","q103tm.bin", "s11tm.bin"};
     private static String[] configfiles = {"ei_config"};
     private static String DualFilePath;
     private static String datapath ;
     private static String filepath ;
     private static String cachepath ;
 
+    private static CountDownLatch mCountDownLatch;
+
     static Semaphore semaphore = new Semaphore(1);
+
+    static {
+        System.loadLibrary("wffr");
+        System.loadLibrary("wffrjni");
+
+    }
+
+    private static class  sqThread extends Thread {
+        @Override
+        public void run() {
+            try {
+                //在线授权
+                SetOnlineLicensing(1);
+                setVerifyLic(DualFilePath);
+                sleep(5*1000);
+                mCountDownLatch.countDown();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public static String Initialize(Context context){
         mContext=context;
@@ -37,16 +62,31 @@ public class EIFace {
         cachepath=AssetFileUtil.getInstance(mContext).getCachepath();
         DualFilePath=AssetFileUtil.getInstance(mContext).getDualFilePath();
 
+        mCountDownLatch=new CountDownLatch(1);
+
         //检测资源文件
         copyAssets();
-        //初始化算法接口的一些参数
-        initwff();
-        //initDB()
-        initDB();
+        Log.d(TAG, "DualFilePath: "+DualFilePath);
+
+        new sqThread().run();
+
+        try {
+            Log.d(TAG, "Initialize: await()");
+            mCountDownLatch.await();
+//            //授权文件路径
+//            setVerifyLic(DualFilePath);
+            //初始化算法接口的一些参数
+            initwff();
+            //initDB()
+            initDB();
 //        openSerial();
 
-        //log control
-        setLog(true,0);
+            //log control
+            setLog(true,0);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return DualFilePath;
     }
 
@@ -89,7 +129,8 @@ public class EIFace {
             semaphore.acquire();
             int i = -3;
             if (TextUtils.isEmpty(msg)) {
-                i = wffrdualcamapp.startExecution(clrFrame, irFrame, frameWidth, frameHeight, msg);
+                i = wffrdualcamapp.startExecutionFast(clrFrame, irFrame, frameWidth, frameHeight, msg);
+//                i = wffrdualcamapp.startExecution(clrFrame, irFrame, frameWidth, frameHeight, msg);
             }else {
                 String id = msg.substring(msg.lastIndexOf(',')+1).trim();
                 String name = msg.substring(0, msg.lastIndexOf(',')).trim();
@@ -210,6 +251,32 @@ public class EIFace {
     public static String getAssetPath(){
         return wffrdualcamapp.getAssetPath();
     }
+
+
+    /**
+     *Lic Path
+     * @param path
+     */
+    private static void setVerifyLic(String path){
+        wffrdualcamapp.VerifyLic(path);
+    }
+
+    /**
+     * SetOnlineLicensing
+     * @param enable:1 diable:0
+     */
+    private static void SetOnlineLicensing(int enable){
+        wffrdualcamapp.SetOnlineLicensing(enable);
+    }
+
+    /**
+     * GetOnlineLicensingFlag
+     * @return
+     */
+    public static int GetOnlineLicensingFlag(){
+        return  wffrdualcamapp.GetOnlineLicensingFlag();
+    }
+
 
     /**
      *  Should be set before initialize() API is called
@@ -332,13 +399,12 @@ public class EIFace {
 
         setFinishState(1);
 
-        Log.d(TAG, "DualFilePath: "+DualFilePath);
         setAssetPath(DualFilePath);
 
         //设置识别门槛
         SetRecognitionThreshold(SPUtil.getValue(mContext,"threshold", GetRecognitionThreshold()));
         //最小人脸占屏幕百分比
-        SetMinFaceDetectionSizePercent(40);
+        SetMinFaceDetectionSizePercent(10);
         //wffrjni.SetVerbose("",1);
         //wffrjni.setAndroidVerbose(0);
 //        wffrjni.EnableImageSaveForDebugging(1);

@@ -45,6 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
         mUnbinder = ButterKnife.bind(mActivity);
 
         initview();
+
     }
 
     private void initview(){

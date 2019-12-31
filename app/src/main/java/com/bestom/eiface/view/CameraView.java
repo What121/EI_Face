@@ -138,6 +138,7 @@ public class CameraView extends TextureView implements TextureView.SurfaceTextur
     @Override
     public void onSurfaceTextureUpdated(SurfaceTexture surface) {
 //        Log.d(TAG, "onSurfaceTextureUpdated: ");
+        cameraActivity.drawOutput(EIFace.getFaceCoordinates(), CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT, enroll);
     }
 
     //region Saveimages
@@ -203,8 +204,7 @@ public class CameraView extends TextureView implements TextureView.SurfaceTextur
 
             /* save image in folder */
             if(imagesBufferArray!=null&&cameraActivity!=null) {
-//            Log.i(TAG, "STATE : " + wffrdualcamapp.getState());
-                Log.i(TAG, "STATE : " + EIFace.getState());
+//                Log.i(TAG, "STATE : " + EIFace.getState());
 
                 if (!isStartfalg) {
                     FrameInfo frameInfo = new FrameInfo();
@@ -256,7 +256,7 @@ public class CameraView extends TextureView implements TextureView.SurfaceTextur
                 long starttime = System.currentTimeMillis();
                 int flag = EIFace.startExecution(frameInfos[0].clrFrame, frameInfos[0].irFrame, CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT,frameInfos[0].msg);
                 long EIfinishtim = System.currentTimeMillis();
-                Log.e("**Time**", "\nstarttime:"+starttime+"\nEIfinishtime:"+EIfinishtim+"\nEITime"+(EIfinishtim-starttime) );
+//                Log.e("**Time**", "\nstarttime:"+starttime+"\nEIfinishtime:"+EIfinishtim+"\nEITime"+(EIfinishtim-starttime) );
                 cameraActivity.drawOutput(EIFace.getFaceCoordinates(), CameraController.CAMERA_WIDTH, CameraController.CAMERA_HEIGHT, enroll);
                 if(enroll){
                     //Main ui
