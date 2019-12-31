@@ -46,11 +46,17 @@ public class EIFace {
         @Override
         public void run() {
             try {
-                //在线授权
-                SetOnlineLicensing(1);
-                setVerifyLic(DualFilePath);
-                if (!(new File(DualFilePath+File.separator+permfile).exists()))
+                if (!(new File(DualFilePath+File.separator+permfile).exists())){
+                    //在线授权
+                    SetOnlineLicensing(1);
+                    setVerifyLic(DualFilePath);
                     sleep(5*1000);
+                }else {
+                    //在线授权
+                    SetOnlineLicensing(1);
+                    setVerifyLic(DualFilePath);
+                }
+
                 mCountDownLatch.countDown();
             } catch (InterruptedException e) {
                 e.printStackTrace();
