@@ -15,6 +15,7 @@ import com.bestom.ei_library.core.manager.Serial.SerialManager;
 import com.wf.wffrdualcamapp;
 import com.wf.wffrjni;
 
+import java.io.File;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
 
@@ -25,6 +26,7 @@ public class EIFace {
 //    private static String[] binfiles = {"b1.bin", "f160tm.bin","p0.bin", "p1tc.bin", "p2tc.bin", "p3tc.bin", "p4tc.bin", "q31tm.bin","q103tm.bin", "s11tm.bin"};
     private static String[] binfiles = {"b1.bin", "f160tm.bin","p0.bin", "p1tc.bin", "p2tc.bin", "p3tc.bin", "p4tc.bin", "q35tm.bin","q103tm.bin", "s11tm.bin"};
     private static String[] configfiles = {"ei_config"};
+    private static String permfile="perm.lic";
     private static String DualFilePath;
     private static String datapath ;
     private static String filepath ;
@@ -47,7 +49,8 @@ public class EIFace {
                 //在线授权
                 SetOnlineLicensing(1);
                 setVerifyLic(DualFilePath);
-                sleep(5*1000);
+                if (!(new File(DualFilePath+File.separator+permfile).exists()))
+                    sleep(5*1000);
                 mCountDownLatch.countDown();
             } catch (InterruptedException e) {
                 e.printStackTrace();
