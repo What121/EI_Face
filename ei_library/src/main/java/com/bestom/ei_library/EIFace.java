@@ -7,10 +7,12 @@ import android.view.TextureView;
 
 import com.bestom.ei_library.commons.constant.EICode;
 import com.bestom.ei_library.commons.constant.Settings;
+import com.bestom.ei_library.commons.exceptions.SerialException;
 import com.bestom.ei_library.commons.utils.AssetFileUtil;
 import com.bestom.ei_library.commons.utils.FLogs;
 import com.bestom.ei_library.commons.utils.SPUtil;
 import com.bestom.ei_library.core.api.DBApi;
+import com.bestom.ei_library.core.manager.Serial.Serial485Manager;
 import com.bestom.ei_library.core.manager.Serial.SerialManager;
 import com.wf.wffrdualcamapp;
 import com.wf.wffrjni;
@@ -88,7 +90,6 @@ public class EIFace {
             initwff();
             //initDB()
             initDB();
-//        openSerial();
 
             //log control
             setLog(true,0);
@@ -359,10 +360,27 @@ public class EIFace {
     //endregion
 
     /**********************************************************************
-     * 打开串口
+     * 打开485串口
      */
-    private static void openSerial() {
-        SerialManager.getInstance().turnOn();
+    public static void open485Serial() {
+        Serial485Manager.getInstance().config("/dev/ttyS3", 9600);
+        Serial485Manager.getInstance().turnOn();
+    }
+
+    public static void serial485_sendHex(String hex) {
+        try {
+            Serial485Manager.getInstance().sendHex(hex);
+        } catch (SerialException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void serial485_sendTxt(String txt) {
+        Serial485Manager.getInstance().sendTxt(txt);
+    }
+
+    public static void serial485_sendBytes(byte[] args) {
+        Serial485Manager.getInstance().send(args);
     }
 
     /**********************************************************************

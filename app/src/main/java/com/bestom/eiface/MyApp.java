@@ -8,10 +8,12 @@ import android.os.PowerManager;
 import android.util.Log;
 
 import com.bestom.ei_library.EIFace;
+import com.bestom.ei_library.commons.exceptions.SerialException;
 import com.bestom.ei_library.commons.utils.SPUtil;
 import com.bestom.ei_library.core.api.SerialApi;
 import com.bestom.ei_library.core.api.SysApi;
 import com.bestom.ei_library.commons.constant.Settings;
+import com.bestom.ei_library.core.manager.Serial.SerialManager;
 
 public class MyApp extends Application {
     private static final String TAG = "MyApp";
@@ -55,7 +57,7 @@ public class MyApp extends Application {
         face_state= SPUtil.getValue(mContext, Settings.FACE_STATE,true);
         face_times= SPUtil.getValue(mContext,Settings.FACE_TIMES,1);
 
-        //初始化算法、串口
+        //初始化算法
         EIFace.Initialize(mContext);
         DualFilePath=EIFace.getDualFilePath();
         Datapath = EIFace.getDatapath();
@@ -65,14 +67,23 @@ public class MyApp extends Application {
         mSysApi.writeLed("0");
         SPUtil.putValue(mContext, Settings.FACE_IR,false);
 
-//        SerialManager.getInstance().turnOn();
-
         mtimehandler=new Handler();
         pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         mWakeLock= pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, TAG);
         //设置屏幕保持常亮，需要释放release（）
         mWakeLock.setReferenceCounted(false);
         mWakeLock.acquire();
+
+        //region test 485
+        mSysApi.write485("1");
+        EIFace.open485Serial();
+        EIFace.serial485_sendTxt("fdsdfsfsdfsdfsdf");
+        try {
+            SerialManager.getInstance().sendHex("121121121");
+        } catch (SerialException e) {
+            e.printStackTrace();
+        }
+        //endregion
 
         Log.d(TAG, "init: finished");
     }

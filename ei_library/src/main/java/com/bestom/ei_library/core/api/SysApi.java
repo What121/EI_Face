@@ -26,6 +26,10 @@ public class SysApi{
         mShellManager.MustComd(REBOOT);
     }
 
+    public boolean write485(String val){
+        return FilesManager.getInstance().write485(val);
+    }
+
     public boolean writeLed(String val){
         return FilesManager.getInstance().writeLed(val);
     }
