@@ -78,11 +78,6 @@ public class MyApp extends Application {
         mSysApi.write485("1");
         EIFace.open485Serial();
         EIFace.serial485_sendTxt("fdsdfsfsdfsdfsdf");
-        try {
-            SerialManager.getInstance().sendHex("121121121");
-        } catch (SerialException e) {
-            e.printStackTrace();
-        }
         //endregion
 
         Log.d(TAG, "init: finished");
