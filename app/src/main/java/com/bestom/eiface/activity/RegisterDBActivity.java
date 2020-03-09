@@ -1,6 +1,5 @@
 package com.bestom.eiface.activity;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.SearchManager;
@@ -10,9 +9,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -40,7 +36,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class RegisterDBActivity extends AppCompatActivity {
+public class RegisterDBActivity extends BaseActivity {
     private static final String TAG = "RegisterDBActivity";
     private final int INIT_DATA=111;
     private Context mContext;

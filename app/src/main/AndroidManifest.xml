@@ -7,6 +7,7 @@
     <!--android:sharedUserId="android.uid.system"-->
 
     <uses-feature android:name="android.hardware.camera2.full" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -49,7 +50,11 @@
         <!-- android:windowSoftInputMode="adjustResize|stateHidden"/> -->
         <activity android:name=".activity.RegisterIMGActivity" />
         <activity android:name=".activity.RegisterDBActivity" />
-        <activity android:name=".activity.SettingsActivity"/>
+        <activity android:name=".activity.SettingsActivity" />
+        <activity android:name=".activity.ResetAndLoaderActivity"
+            android:theme="@style/activity_dialog_styles"
+            />
+
         <meta-data
             android:name="android.support.VERSION"
             android:value="28.0.0"

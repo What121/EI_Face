@@ -19,6 +19,6 @@ public class Const {
     public static final String Serial_Replay_MAGIC = "55A5";
 
     public static final String REBOOT="reboot";
-
+    public static final String Loader="reboot loader";
 
 }

@@ -8,6 +8,7 @@ import com.bestom.ei_library.core.manager.Shell.ShellManager;
 
 import java.io.File;
 
+import static com.bestom.ei_library.commons.constant.Const.Loader;
 import static com.bestom.ei_library.commons.constant.Const.REBOOT;
 
 public class SysApi{
@@ -24,6 +25,10 @@ public class SysApi{
      */
     public void reboot(){
         mShellManager.MustComd(REBOOT);
+    }
+
+    public void Loader(){
+        mShellManager.StingComd(Loader);
     }
 
     public boolean write485(String val){

@@ -8,12 +8,10 @@ import android.os.PowerManager;
 import android.util.Log;
 
 import com.bestom.ei_library.EIFace;
-import com.bestom.ei_library.commons.exceptions.SerialException;
 import com.bestom.ei_library.commons.utils.SPUtil;
 import com.bestom.ei_library.core.api.SerialApi;
 import com.bestom.ei_library.core.api.SysApi;
 import com.bestom.ei_library.commons.constant.Settings;
-import com.bestom.ei_library.core.manager.Serial.SerialManager;
 
 public class MyApp extends Application {
     private static final String TAG = "MyApp";

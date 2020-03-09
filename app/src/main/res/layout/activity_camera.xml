@@ -5,157 +5,169 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@mipmap/main_background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activity.CameraActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="@color/colorGray">
+    <LinearLayout
+        android:layout_width="480dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/sysinfo_tv"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:text="DB"
-            android:textColor="@color/colorLightGreen"
-            android:textSize="22sp" />
+            android:background="@color/colorGray">
 
-        <TextView
-            android:id="@+id/upregister_tv"
+            <TextView
+                android:id="@+id/sysinfo_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="DB"
+                android:textColor="@color/colorLightGreen"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/upregister_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@+id/register_tv"
+                android:text="上传注册"
+                android:textColor="@color/colorLightGreen"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/register_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_toLeftOf="@+id/setting_tv"
+                android:text="人脸注册"
+                android:textColor="@color/colorLightGreen"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/setting_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                android:text="设置"
+                android:textColor="@color/colorLightGreen"
+                android:textSize="22sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_toLeftOf="@+id/register_tv"
-            android:text="上传注册"
-            android:textColor="@color/colorLightGreen"
-            android:textSize="22sp" />
+            android:layout_height="0dp"
+            android:layout_weight="5">
 
-        <TextView
-            android:id="@+id/register_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_toLeftOf="@+id/setting_tv"
-            android:text="人脸注册"
-            android:textColor="@color/colorLightGreen"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/setting_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="20dp"
-            android:text="设置"
-            android:textColor="@color/colorLightGreen"
-            android:textSize="22sp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5">
-
-        <!--<com.bestom.ufacemod.view.CameraView-->
+            <!--<com.bestom.ufacemod.view.CameraView-->
             <!--android:id="@+id/camera_view"-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="match_parent" />-->
 
-        <ImageView
-            android:id="@+id/rect_dw_img"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_rect_dw" />
-
-        <RelativeLayout
-            android:id="@+id/layout_backcamera"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.bestom.eiface.view.CameraView
-                android:id="@+id/cameraView_back"
+            <ImageView
+                android:id="@+id/rect_dw_img"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:msv_cameraFront="false"
-                app:msv_cameraMirrorX="true" />
+                android:layout_height="30dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_rect_dw" />
 
-            <com.bestom.eiface.view.CameraDetectView
-                android:id="@+id/cameraDetect_back"
+            <RelativeLayout
+                android:id="@+id/layout_backcamera"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content">
 
-        </RelativeLayout>
+                <com.bestom.eiface.view.CameraView
+                    android:id="@+id/cameraView_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:msv_cameraFront="false"
+                    app:msv_cameraMirrorX="true" />
 
-        <RelativeLayout
-            android:id="@+id/layout_frontcamera"
-            android:paddingTop="15dp"
-            android:paddingLeft="15dp"
-            android:layout_width="130dp"
-            android:layout_height="130dp">
+                <com.bestom.eiface.view.CameraDetectView
+                    android:id="@+id/cameraDetect_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-            <com.bestom.eiface.view.CameraView
-                android:id="@+id/cameraView_front"
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_frontcamera"
+                android:paddingTop="15dp"
+                android:paddingLeft="15dp"
+                android:layout_width="130dp"
+                android:layout_height="130dp">
+
+                <com.bestom.eiface.view.CameraView
+                    android:id="@+id/cameraView_front"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:msv_cameraFront="true" />
+
+                <com.bestom.eiface.view.CameraDetectView
+                    android:visibility="gone"
+                    android:id="@+id/cameraDetect_front"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tx_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/rect_dw_img"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:text="0.0"
+                android:textColor="@color/colorRed"
+                android:textSize="18sp" />
+
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:msv_cameraFront="true" />
-
-            <com.bestom.eiface.view.CameraDetectView
-                android:visibility="gone"
-                android:id="@+id/cameraDetect_front"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_rect_up" />
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/tx_score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/rect_dw_img"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:text="0.0"
-            android:textColor="@color/colorRed"
-            android:textSize="18sp" />
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/colorGray" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_alignParentBottom="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_rect_up" />
-    </RelativeLayout>
+            android:src="@drawable/ic_rect_bm" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/colorGray" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:background="@color/colorGray"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_rect_bm" />
+            <include layout="@layout/view_user_info" />
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:background="@color/colorGray"
-        android:gravity="center"
-        android:orientation="horizontal">
 
-        <include layout="@layout/view_user_info" />
     </LinearLayout>
+    
+
 
 </LinearLayout>

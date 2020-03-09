@@ -39,7 +39,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class RegisterIMGActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterIMGActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "RegisterIMGActivity";
     private Context mContext;
     private Activity mActivity;

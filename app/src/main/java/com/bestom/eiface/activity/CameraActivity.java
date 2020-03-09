@@ -15,7 +15,6 @@ import android.graphics.YuvImage;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -52,7 +51,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.bestom.eiface.MyApp.permissions;
 
-public class CameraActivity extends AppCompatActivity implements View.OnClickListener {
+public class CameraActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "CameraActivity";
 
     private Context mContext;
@@ -124,6 +123,11 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_IMMERSIVE;
+        getWindow().setAttributes(params);
+
         mContext=this;
         mActivity=this;
         mUnbinder= ButterKnife.bind(mActivity);

@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">EIFace</string>
+
+    <!--  changed -->
+    <string name="IFIA_btn_yes">Yes</string>
+    <string name="IFIA_btn_no">No</string>
+
+    <string name="reset_title">恢复出厂设置</string>
+    <string name="loader_title">切换到烧录模式</string>
+    <string name="reset_info">您是否要恢复出厂设置（长按烧录键确定，单击取消）</string>
+    <string name="loader_info">您是否要进入烧录模式（长按烧录键确定，单击取消）</string>
 </resources>
