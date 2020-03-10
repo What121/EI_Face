@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.bestom.ei_library.EIFace;
 import com.bestom.ei_library.commons.utils.SPUtil;
@@ -20,6 +21,8 @@ import com.bestom.ei_library.commons.constant.Settings;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+
+import static com.bestom.eiface.MyApp.mSysApi;
 
 public class SettingsActivity extends BaseActivity {
     private static final String TAG = "SettingsActivity";
@@ -35,6 +38,7 @@ public class SettingsActivity extends BaseActivity {
     @BindView(R.id.pass_NO) Spinner passTimes_sp;
     @BindView(R.id.face_key) Spinner passKey_sp;
     @BindView(R.id.face_model) Spinner faceModel_sp;
+    @BindView(R.id.tv485) TextView tv485;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,15 @@ public class SettingsActivity extends BaseActivity {
     }
 
     private void initview(){
+
+        tv485.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EIFace.serial485_sendHex("F1F2F3");
+            }
+        });
+
+
         back_imgview.setOnClickListener(view -> finish());
 
         //IR框状态
@@ -66,10 +79,10 @@ public class SettingsActivity extends BaseActivity {
 
         //打开/关闭继电器
         relay_sw.setOnCheckedChangeListener((compoundButton, b)
-                -> MyApp.mSysApi.writeRelay(b?"1":"0"));
+                -> mSysApi.writeRelay(b?"1":"0"));
         //打开/关闭LED
         led_sw.setOnCheckedChangeListener((compoundButton, b)
-                -> MyApp.mSysApi.writeLed(b?"1":"0"));
+                -> mSysApi.writeLed(b?"1":"0"));
         //识别次数
         passTimes_sp.setSelection(MyApp.face_times-1,true);
         passTimes_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -120,6 +133,8 @@ public class SettingsActivity extends BaseActivity {
 
             }
         });
+
+
 
     }
 
