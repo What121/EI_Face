@@ -25,8 +25,8 @@ public class EIFace {
     private static final String TAG = "EIFace";
     private static Context mContext;
 
-//    private static String[] binfiles = {"b1.bin", "f160tm.bin","p0.bin", "p1tc.bin", "p2tc.bin", "p3tc.bin", "p4tc.bin", "q31tm.bin","q103tm.bin", "s11tm.bin"};
-    private static String[] binfiles = {"b1.bin", "f160tm.bin","p0.bin", "p1tc.bin", "p2tc.bin", "p3tc.bin", "p4tc.bin", "q35tm.bin","q103tm.bin", "s11tm.bin"};
+    private static String[] binfiles = {"b1.bin", "f160tm.bin","p0.bin", "p1tc.bin", "p2tc.bin", "p3tc.bin", "p4tc.bin", "q31tm.bin","q103tm.bin", "s11tm.bin"};
+//    private static String[] binfiles = {"b1.bin", "f160tm.bin","p0.bin", "p1tc.bin", "p2tc.bin", "p3tc.bin", "p4tc.bin", "q35tm.bin","q103tm.bin", "s11tm.bin"};
     private static String[] configfiles = {"ei_config"};
     private static String permfile="perm.lic";
     private static String DualFilePath;
@@ -139,8 +139,8 @@ public class EIFace {
             semaphore.acquire();
             int i = -3;
             if (TextUtils.isEmpty(msg)) {
-                i = wffrdualcamapp.startExecutionFast(clrFrame, irFrame, frameWidth, frameHeight, msg);
-//                i = wffrdualcamapp.startExecution(clrFrame, irFrame, frameWidth, frameHeight, msg);
+//                i = wffrdualcamapp.startExecutionFast(clrFrame, irFrame, frameWidth, frameHeight, msg);
+                i = wffrdualcamapp.startExecution(clrFrame, irFrame, frameWidth, frameHeight, msg);
             }else {
                 String id = msg.substring(msg.lastIndexOf(',')+1).trim();
                 String name = msg.substring(0, msg.lastIndexOf(',')).trim();
