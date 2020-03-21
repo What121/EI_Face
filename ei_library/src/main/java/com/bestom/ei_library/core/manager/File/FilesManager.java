@@ -10,7 +10,8 @@ public class FilesManager extends FilesHelper{
 	private final String ledpath="/sys/bstled/val";
 	private final String relaypath="/sys/bstrelayer/val";
 	private final String powerpath="/sys/bstrpower/val";
-	private File ledFile,relayFile,powerFile,_485File;
+	private final String temppath="/sys/devices/platform/ff1a0000.i2c/i2c-2/2-0068/get_temp_buf";
+	private File ledFile,relayFile,powerFile,_485File,tempFile;
 
 	private static volatile FilesManager instance;
 
@@ -19,6 +20,7 @@ public class FilesManager extends FilesHelper{
 		relayFile=new File(relaypath);
 		powerFile=new File(powerpath);
 		_485File=new File(_485path);
+		tempFile=new File(temppath);
 	}
 
 	public static FilesManager getInstance(){
@@ -59,6 +61,10 @@ public class FilesManager extends FilesHelper{
 
 	public String readPower(){
 		return read(powerFile);
+	}
+
+	public String readTemp(){
+		return read(tempFile);
 	}
 
 

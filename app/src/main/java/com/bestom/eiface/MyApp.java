@@ -44,7 +44,7 @@ public class MyApp extends Application {
         init();
 
 
-        checkScreenThread.start();
+//        checkScreenThread.start();
     }
 
     @SuppressLint("InvalidWakeLockTag")
@@ -62,7 +62,7 @@ public class MyApp extends Application {
         Filepath = EIFace.getFilepath();
         Cachepath = EIFace.getCachepath();
 
-        mSysApi.writeLed("0");
+        mSysApi.writeLed("1");
         SPUtil.putValue(mContext, Settings.FACE_IR,false);
 
         mtimehandler=new Handler();
@@ -80,6 +80,7 @@ public class MyApp extends Application {
 
         Log.d(TAG, "init: finished");
     }
+
     //region checkScreenThread
     private Thread checkScreenThread=new Thread(new Runnable() {
         @Override
@@ -87,6 +88,10 @@ public class MyApp extends Application {
             while (true){
                 try {
                     Thread.sleep(3000);
+
+                    //region test Temp
+//                    Log.d(TAG, "Temp: "+ Arrays.toString(mSysApi.readTemp()) );
+                    //endregion
 
                     //region test use random int control screen and led
                     int i = (int)(1+Math.random()*(10-1+1));

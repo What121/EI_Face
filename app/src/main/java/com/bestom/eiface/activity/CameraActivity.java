@@ -49,6 +49,9 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.bestom.eiface.MyApp.CAMERA_HEIGHT;
+import static com.bestom.eiface.MyApp.CAMERA_WIDTH;
+import static com.bestom.eiface.MyApp.mSysApi;
 import static com.bestom.eiface.MyApp.permissions;
 
 public class CameraActivity extends BaseActivity implements View.OnClickListener {
@@ -58,6 +61,8 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
     private Activity mActivity;
     private AlertDialog alertDialog;
     private Unbinder mUnbinder;
+
+    private boolean getTempFlag=false;
 
     public final int DIALOG_DISMISS=11;
     public final int UPDATE_PASSINFO=10;
@@ -83,6 +88,7 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
     ArrayList<String> nameList ;
     ArrayList<String> IDList ;
     ArrayList<Float> confidenceValList;
+    int[][] Temps;
 
     private String passID="";
     private int passtimes=0;
@@ -138,6 +144,13 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
 
         initview();
         initdialog();
+
+        initChildThread();
+    }
+
+    private void initChildThread(){
+        getTempFlag=true;
+        getTempThread.start();
     }
 
     private void  initview(){
@@ -183,8 +196,10 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
         frontCameraView=null;
         frontCameraView=findViewById(R.id.cameraView_front);
         frontDetecView=findViewById(R.id.cameraDetect_front);
+        frontDetecView.setCameraParam(CAMERA_WIDTH,CAMERA_HEIGHT);
         backCameraView=findViewById(R.id.cameraView_back);
         backDetecView=findViewById(R.id.cameraDetect_back);
+        backDetecView.setCameraParam(CAMERA_WIDTH,CAMERA_HEIGHT);
 
         frontCameraView.setDrawActivity(this);
         if(!SPUtil.getValue(mContext, Settings.FACE_IR,false)){
@@ -496,8 +511,10 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
                 backDetecView.setVisibility(View.VISIBLE);
                 //IR camera 不显示实时信息
 //                frontDetecView.setVisibility(View.VISIBLE);
-                backDetecView.setRectValuesArray(clrleftCornerValues, clrtopCornerValues, clrrightCornerValues, clrbottomCornerValues);
-                frontDetecView.setRectValuesArray(irleftCornerValues, irtopCornerValues, irrightCornerValues, irbottomCornerValues);
+//                backDetecView.setRectValuesArray(clrleftCornerValues, clrtopCornerValues, clrrightCornerValues, clrbottomCornerValues);
+                backDetecView.setRectValuesArray(clrleftCornerValues, clrtopCornerValues, clrrightCornerValues, clrbottomCornerValues,Temps);
+//                frontDetecView.setRectValuesArray(irleftCornerValues, irtopCornerValues, irrightCornerValues, irbottomCornerValues);
+                frontDetecView.setRectValuesArray(irleftCornerValues, irtopCornerValues, irrightCornerValues, irbottomCornerValues,Temps);
                 backDetecView.setValuesArray(nameList, confidenceValList);
                 frontDetecView.setValuesArray(nameList, confidenceValList);
 
@@ -557,5 +574,16 @@ public class CameraActivity extends BaseActivity implements View.OnClickListener
     public void showMsg(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
+
+    private Thread getTempThread=new Thread(() -> {
+        while (getTempFlag){
+            try {
+                Thread.sleep(1000);
+                Temps = mSysApi.readTemp();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    });
 
 }

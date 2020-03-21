@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
@@ -15,6 +16,7 @@ import com.bestom.ei_library.EIFace;
 import com.bestom.eiface.MyApp;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CameraDetectView extends View {
     private static final String TAG = "CameraDetectView";
@@ -23,6 +25,8 @@ public class CameraDetectView extends View {
     ArrayList<Integer> topCornerValues;
     ArrayList<Integer> rightCornerValues;
     ArrayList<Integer> bottomCornerValues;
+    int[][] Temp;
+    ArrayList<Integer> tempsChose = new ArrayList<>();
     ArrayList<String> nameList;
     ArrayList<Float> confidenceValList;
 
@@ -101,7 +105,8 @@ public class CameraDetectView extends View {
             if(MyApp.MirrorX){
                 leftCornerValues.set(iValue, (int) (-(leftCornerValues.get(iValue) * ScaleX-canvas.getWidth())));
                 rightCornerValues.set(iValue,(int) (-(rightCornerValues.get(iValue) * ScaleX-canvas.getWidth())));
-            }else {
+            }
+            else {
                 leftCornerValues.set(iValue, (int) (leftCornerValues.get(iValue) * ScaleX));
                 rightCornerValues.set(iValue, (int) (rightCornerValues.get(iValue) * ScaleX));
             }
@@ -112,18 +117,24 @@ public class CameraDetectView extends View {
             int rightV = rightCornerValues.get(iValue);
             int topV = topCornerValues.get(iValue);
             int bottomV = bottomCornerValues.get(iValue);
+
+            //region 初始化绘制圆圈的参数
             int cirX=(leftV+rightV)/2;
             int cirY=(topV+bottomV)/2;
             int cirR;
+
             if (Math.abs(rightV-leftV)>=Math.abs(bottomV-topV)){
                 cirR = Math.abs(rightV-leftV)/2;
-            }else {
+            }
+            else {
                 cirR = Math.abs(bottomV-topV)/2;
             }
                    /* int leftV = (l+1000) * vWidth/2000;
                     int topV  = (t+1000) * vHeight/2000;
                     int rightV = (r+1000) * vWidth/2000;
                     int bottomV = (b+1000) * vHeight/2000;*/
+            //endregion
+
             //region enroll
             if (enroll) {
                 if (confidenceValList.size() != 0 && confidenceValList.get(iValue) == -1) {
@@ -137,6 +148,9 @@ public class CameraDetectView extends View {
 
             //region !enroll
             else {
+                // 截取 temp 16*16 矩阵的val值
+                int x0,x1,y0,y1;
+
 //                if (confidenceValList.size() != 0 && confidenceValList.get(iValue) > wffrjni.GetRecognitionThreshold()) {
                 if (confidenceValList.size() != 0 && confidenceValList.get(iValue) > EIFace.GetRecognitionThreshold()) {
                     paint.setColor(0xff20960c);
@@ -146,8 +160,22 @@ public class CameraDetectView extends View {
                     //绘制普通矩形框
                     if (MyApp.MirrorX){
                         canvas.drawRect(new Rect(rightV,topV,leftV,bottomV),paint);
-                    }else {
+
+                        x0=  (int)Math.floor((double) rightV/cameraWidth * 16) ;
+                        x1=  (int)Math.ceil((double)leftV/cameraWidth * 16) ;
+                        y0=  (int)Math.floor((double)topV/cameraHeight*16);
+                        y1=  (int)Math.ceil((double)((bottomV-topV)/5+topV)/cameraHeight*16);
+
+                        canvas.drawText("22.22℃",(leftV-rightV-4),(bottomV-topV-4),(leftV-rightV+4),(leftV-rightV-8),paint);
+                    }
+                    else {
                         canvas.drawRect(new Rect(leftV,topV,rightV,bottomV),paint);
+
+                        x0=  (int)Math.floor((double)leftV/cameraWidth * 16) ;
+                        x1=  (int)Math.ceil((double)rightV/cameraWidth * 16) ;
+                        y0=  (int)Math.floor((double)topV/cameraHeight*16);
+                        y1=  (int)Math.ceil((double)((bottomV-topV)/5+topV)/cameraHeight*16);
+                        canvas.drawText("22.22℃",(rightV-leftV-4),(bottomV-topV-4),(rightV-leftV+4),(leftV-rightV-8),paint);
                     }
                     //绘制圆形
 //                    canvas.drawCircle(cirX,cirY,cirR,paint);
@@ -157,7 +185,8 @@ public class CameraDetectView extends View {
 //                        canvas.drawText(nameList.get(iValue), (leftV + rightV) / 2, (bottomV + 75), paint);
                     }
 
-                } else {
+                }
+                else {
                     if (confidenceValList.size() != 0 && confidenceValList.get(iValue) == 0) {
                         paint.setColor(0xffFFFF00);
                     } else if (confidenceValList.size() != 0 && confidenceValList.get(iValue) == -1) {
@@ -175,15 +204,44 @@ public class CameraDetectView extends View {
 //                    canvas.drawRect(leftV, topV,
 //                            rightV, bottomV, paint);
 //                    drawRectangle(leftV,rightV,topV,bottomV,paint, canvas);
+
                     //绘制普通矩形框
                     if (MyApp.MirrorX){
                         canvas.drawRect(new Rect(rightV,topV,leftV,bottomV),paint);
+//                        canvas.drawRect(new Rect(rightV,topV,leftV,bottomV-bottomV/5*4),paint);
+                        x0=  (int)Math.floor((double) rightV/cameraWidth * 16) ;
+                        x1=  (int)Math.ceil((double)leftV/cameraWidth * 16) ;
+                        y0=  (int)Math.floor((double)topV/cameraHeight*16);
+                        y1=  (int)Math.ceil((double)((bottomV-topV)/5+topV)/cameraHeight*16);
                     }else {
                         canvas.drawRect(new Rect(leftV,topV,rightV,bottomV),paint);
+//                        canvas.drawRect(new Rect(leftV,topV,rightV,bottomV-bottomV/5*4),paint);
+                        x0=  (int)Math.floor((double)leftV/cameraWidth * 16) ;
+                        x1=  (int)Math.ceil((double)rightV/cameraWidth * 16) ;
+                        y0=  (int)Math.floor((double)topV/cameraHeight*16);
+                        y1=  (int)Math.ceil((double)((bottomV-topV)/5+topV)/cameraHeight*16);
                     }
+
                     //绘制圆形
 //                    canvas.drawCircle(cirX,cirY,cirR,paint);
                 }
+
+                //region 获取temp 截取数据中的max，并进行绘制
+                Log.d(TAG, "x0: "+x0+";x1:"+x1+";y0:"+y0+";y1:"+y1);
+                tempsChose.clear();
+                //绘制Temp
+                if (x0<x1&&y0<y1){
+                    for (int i = x0;i<=x1;i++){
+                        for (int j = y0;j<=y1;j++){
+                            tempsChose.add(Temp[i][j]);
+                        }
+                    }
+                }
+                double resultTemp= Collections.max(tempsChose)/100;
+                Log.d(TAG, tempsChose.toString());
+                Log.d(TAG, "max val: "+resultTemp);
+                canvas.drawText(resultTemp+"℃",(leftV+rightV)/2,(bottomV-topV)/5+topV,paint);
+                //endregion
             }
             //endregion
 
@@ -397,6 +455,17 @@ public class CameraDetectView extends View {
         this.topCornerValues = topCornerValues;
         this.rightCornerValues = rightCornerValues;
         this.bottomCornerValues = bottomCornerValues;
+//        Log.d("ValuesRect ", "leftList " + leftCornerValues + " topList " + topCornerValues +
+//                " rightList " + rightCornerValues + " bottomList " + bottomCornerValues);
+    }
+
+    public void setRectValuesArray(ArrayList<Integer> leftCornerValues, ArrayList<Integer> topCornerValues,
+                                   ArrayList<Integer> rightCornerValues, ArrayList<Integer> bottomCornerValues,int[][] temp) {
+        this.leftCornerValues = leftCornerValues;
+        this.topCornerValues = topCornerValues;
+        this.rightCornerValues = rightCornerValues;
+        this.bottomCornerValues = bottomCornerValues;
+        this.Temp=temp;
 //        Log.d("ValuesRect ", "leftList " + leftCornerValues + " topList " + topCornerValues +
 //                " rightList " + rightCornerValues + " bottomList " + bottomCornerValues);
     }

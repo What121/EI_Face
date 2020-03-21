@@ -47,6 +47,20 @@ public class SysApi{
         return FilesManager.getInstance().readPower();
     }
 
+    public String readTempTest(){
+        return FilesManager.getInstance().readTemp();
+    }
+
+    public int[][] readTemp(){
+        int[][] temps = new int[16][16];
+        String vals[]=FilesManager.getInstance().readTemp().split(";");
+        for (int i=0;i<vals.length;i++) {
+            temps[i/16][i % 16] = Integer.valueOf(vals[i]);
+        }
+
+        return temps;
+    }
+
     /**
      * system function
      */
